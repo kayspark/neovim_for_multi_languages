@@ -1,0 +1,15 @@
+* A neovim configuration for multiple languages,
+
+This configuration is based on execellent LazyVim and referred lunarvim from time to time.
+
+For those who is using multiple languages, neovim can be a excellent choice.
+  This repository is for my workflow like below :
+  - SQL with oracle databse
+  - Java and C++ legacy projects
+  - zsh/fish/nushell/xml/html for rutine works
+  - Exciting experiment projects with Rust, Json and typescripts.
+
+Codes are not cleaned up yet but it will be keep updated weekly basis.
+
+My journey started with neovim_basic_ide. 
+
