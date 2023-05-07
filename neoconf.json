@@ -1,0 +1,36 @@
+{
+  "neodev": {
+    "library": {
+      "enabled": true,
+      "plugins": true
+    }
+  },
+  "neoconf": {
+    "plugins": {
+      "lua_ls": {
+        "enabled": true
+      },
+      "sqls": {
+        "enabled": true
+      },
+      "sqlls": {
+        "enabled": true
+      },
+      "jdtls": {
+        "enabled": true
+      },
+      "clangd": {
+        "enabled": true
+      },
+      "rust_analyzer": {
+        "enabled": true
+      },
+      "jsonls": {
+        "enabled": true
+      },
+      "tailwindcss": {
+        "enabled": true
+      }
+    }
+  }
+}
