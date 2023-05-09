@@ -31,9 +31,6 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-jdtls",
       lazy = true,
-      dependencies = {
-        "neovim/nvim-lspconfig",
-      },
       config = function()
         -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
         require("lazyvim.util").on_attach(function(client, bufnr)

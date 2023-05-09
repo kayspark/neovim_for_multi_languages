@@ -15,6 +15,7 @@ return {
         end,
       },
       { "nanotee/sqls.nvim" },
+
       -- for java starter
     },
     ---@class PluginLspOpts
@@ -61,7 +62,13 @@ return {
             },
           },
         },
-        sqls = {},
+        sqls = {
+          cmd = { "sqls" },
+          filetypes = { "sql", "oracle" },
+          root_dir = function(fname)
+            return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
+          end,
+        },
         sqlls = {
           cmd = { "/usr/local/bin/sql-language-server", "up", "--method", "stdio" },
           filetypes = { "sql", "oracle" },

@@ -94,6 +94,7 @@ return {
           }),
           null_ls.builtins.formatting.xmlformat,
         },
+
         root_dir = require("null-ls.utils").root_pattern("package.json", ".null-ls-root", ".neoconf.json", ".git"),
       })
     end,

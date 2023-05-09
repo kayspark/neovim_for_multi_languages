@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local Util = require("lazy.core.util")
 
 local M = {}
