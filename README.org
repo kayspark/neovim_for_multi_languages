@@ -11,6 +11,12 @@ For those who is using multiple languages, neovim can be a excellent choice.
 
 Installation instruction is same as LazyVim. Start with starter kit and add your preferred plugins by copying. lua/plugins/lsp directory can be ignored but I copied it due to reference and test purposes. Codes are not cleaned up yet but it will be keep updated weekly basis.
 
+* multiple languages?
+Key binding matters for non english users like me. for example,Ctrl+space for me means changing input languages. Howver many plugins are using it with other purposes.
+In language servers, key binding for code actions also mattered but seems not cared carefully yet. So, I started to make this repository to share my experiments, someday can be a common practice hopefully.
+
+
+* references
 My journey started with:
  - [[https://github.com/LunarVim/nvim-basic-ide.git][neovim_basic_ide]]
  - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
@@ -23,3 +29,7 @@ Dependencies:
 Caution:
 - sqls and sqlls language server seems hard to configure for oracle. can be added some notes seperately later.
 - Snippet related configuration needs to be revisited. Very first start makes some error but can be resumeed without issue.
+
+* work in process
+- rust-analyzer and rust-tools are under testing.
+- sqls works for me though. it seems the only working sql language server for oracle in MacOS yet.
