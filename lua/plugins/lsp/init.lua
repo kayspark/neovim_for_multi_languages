@@ -68,6 +68,10 @@ return {
           root_dir = function(fname)
             return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
           end,
+          deprecate = {
+            to = "sqlls",
+            version = "0.2.0",
+          },
         },
         sqlls = {
           cmd = { "/usr/local/bin/sql-language-server", "up", "--method", "stdio" },
