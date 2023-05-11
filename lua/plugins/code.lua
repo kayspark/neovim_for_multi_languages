@@ -74,9 +74,9 @@ return {
           null_ls.builtins.diagnostics.flake8,
           null_ls.builtins.diagnostics.markdownlint,
           null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.sqlfluff.with({
-            extra_args = { "--dialect", "oracle" },
-          }),
+          -- null_ls.builtins.diagnostics.sqlfluff.with({
+          --   extra_args = { "--dialect", "oracle" },
+          -- }),
           null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
           null_ls.builtins.formatting.fish_indent,
           null_ls.builtins.formatting.clang_format,
@@ -90,7 +90,7 @@ return {
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.rustfmt,
           null_ls.builtins.formatting.sqlfluff.with({
-            extra_args = { "--dialect", "oracle" },
+            extra_args = { "fix", "--dialect", "oracle" },
           }),
           null_ls.builtins.formatting.xmlformat,
         },

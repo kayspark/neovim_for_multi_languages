@@ -12,7 +12,6 @@ local codelldb_adapter = {
 
 local opts = {
   tools = {
-    --executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
     reload_workspace_from_cargo_toml = true,
     runnables = {
       use_telescope = true,
@@ -50,9 +49,8 @@ return {
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "simrat39/rust-tools.nvim",
-    after = "nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim" },
+      "folke/neoconf.nvim",
       {
         "saecki/crates.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
