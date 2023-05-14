@@ -16,6 +16,7 @@ Key binding matters for non english users like me. for example,Ctrl+space for me
 In language servers, key binding for code actions also mattered but seems not cared carefully yet. So, I started to make this repository to share my experiments, someday can be a common practice hopefully.
 
 
+
 * references
 My journey started with:
  - [[https://github.com/LunarVim/nvim-basic-ide.git][neovim_basic_ide]]

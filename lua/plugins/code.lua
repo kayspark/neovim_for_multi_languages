@@ -4,6 +4,7 @@ return {
   -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     opts = {
       ensure_installed = {
         "stylua",
@@ -41,13 +42,6 @@ return {
         pyright = {},
         rust_analyzer = {},
         clangd = {},
-        sqlls = {
-          cmd = { "/usr/local/bin/sql-language-server", "up", "--method", "stdio" },
-          filetypes = { "sql", "oracle" },
-          root_dir = function(fname)
-            return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
-          end,
-        },
       },
     },
   },
@@ -104,7 +98,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "ThePrimeagen/harpoon",
+      -- "ThePrimeagen/harpoon",
       "nvim-telescope/telescope-file-browser.nvim",
     },
     -- apply the config and additionally load fzf-native
@@ -114,16 +108,16 @@ return {
       telescope.load_extension("fzf")
       telescope.load_extension("notify")
       telescope.load_extension("file_browser")
-      telescope.load_extension("harpoon")
+      -- telescope.load_extension("harpoon")
     end,
     keys = {
       -- buffer
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-      --{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
 
-      --      { "<leader>bb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" } },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" } },
       { "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
       { "<leader>sf", Util.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>sF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
@@ -136,7 +130,7 @@ return {
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
       {
-        "<leader>sB",
+        "<leader>fB",
         ":Telescope file_browser file_browser path=%:p:h=%:p:h<cr>",
         desc = "Browse Files",
       },
