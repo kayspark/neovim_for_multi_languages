@@ -101,7 +101,10 @@ return {
       Util.on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.format").on_attach(client, buffer)
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-        require("sqls").on_attach(client, buffer)
+        if client.name == "sqls" then
+          client.server_capabilities.documentFormattingProvider = false
+          require("sqls").on_attach(client, buffer)
+        end
       end)
 
       -- diagnostics

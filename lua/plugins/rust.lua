@@ -42,6 +42,19 @@ local opts = {
     dap = {
       adapter = codelldb_adapter,
     },
+    server = {
+      settings = {
+        ["rust-analyzer"] = {
+          lens = {
+            enable = true,
+          },
+          checkOnSave = {
+            enable = true,
+            command = "clippy",
+          },
+        },
+      },
+    },
   },
 }
 
