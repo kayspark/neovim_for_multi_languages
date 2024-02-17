@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local clangd_flags = {
   "--background-index",
   "--fallback-style=Google",

@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
 local codelldb_adapter = {
   type = "server",

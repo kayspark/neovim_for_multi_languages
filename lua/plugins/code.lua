@@ -1,97 +1,12 @@
 local Util = require("lazyvim.util")
 
 return {
-  -- add any tools you want to have installed below
-  {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "lua_ls",
-        "sqlls",
-        "sqls",
-        "clangd",
-        "jdtls",
-        "java-debug-adaptor",
-        "java-test",
-        "codelldb",
-        "pyrignt",
-        "shellcheck",
-        "shfmt",
-        "rust_analyzer",
-        "flake8",
-      },
-    },
-  },
   -- add symbols-outline
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
-  },
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
-        rust_analyzer = {},
-        clangd = {},
-      },
-    },
-  },
-
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = {
-      {
-        "nvim-lua/plenary.nvim",
-        lazy = true,
-      },
-    },
-    config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        debounce = 150,
-        sources = {
-          null_ls.builtins.code_actions.gitsigns,
-          null_ls.builtins.code_actions.refactoring,
-          null_ls.builtins.code_actions.shellcheck,
-          null_ls.builtins.diagnostics.fish,
-          null_ls.builtins.diagnostics.clang_check,
-          null_ls.builtins.diagnostics.flake8,
-          null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.diagnostics.shellcheck,
-          -- null_ls.builtins.diagnostics.sqlfluff.with({
-          --   extra_args = { "--dialect", "oracle" },
-          -- }),
-          null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
-          null_ls.builtins.formatting.fish_indent,
-          null_ls.builtins.formatting.clang_format,
-          null_ls.builtins.formatting.google_java_format,
-          null_ls.builtins.formatting.mdformat,
-          null_ls.builtins.formatting.prettier.with({
-            extra_filetypes = { "toml" },
-            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-          }),
-          null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.sqlfluff.with({
-            extra_args = { "fix", "--dialect", "oracle" },
-          }),
-          null_ls.builtins.formatting.xmlformat,
-        },
-
-        root_dir = require("null-ls.utils").root_pattern("package.json", ".null-ls-root", ".neoconf.json", ".git"),
-      })
-    end,
   },
   {
 

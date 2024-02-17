@@ -1,3 +1,6 @@
+if true then
+  return {}
+end
 -- Determine OS
 --local home = os.getenv("HOME")
 local home = vim.loop.os_homedir()
