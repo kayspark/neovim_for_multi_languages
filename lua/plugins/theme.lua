@@ -10,11 +10,20 @@ return {
   --       },
   --     },
   --   },
+  --{
+  --  "phha/zenburn.nvim",
+  --  name = "zenburn",
+  --  opts = {
+  ----    transparent_background = true,
+  --    lualine = true,
+  --  },
+  --},
   {
     -- https://github.com/catppuccin/nvim
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
+      flabor = "mocha",
       transparent_background = true,
       integrations = {
         aerial = true,
@@ -56,7 +65,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = function(_, opts)
-      opts.colorscheme = "catppuccin-frappe"
+      opts.colorscheme = "catppuccin"
     end,
   },
 }

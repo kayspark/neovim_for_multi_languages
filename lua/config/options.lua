@@ -43,6 +43,6 @@ vim.cmd([[au BufNewFile,BufRead Podfile setf ruby]])
 if vim.fn.has("nvim-0.8") == 1 then
   vim.opt.cmdheight = 0
 end
-vim.go.lazyredraw = true
+
 vim.o.showcmdloc = "statusline"
 -- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
