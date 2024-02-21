@@ -10,14 +10,14 @@ return {
   --       },
   --     },
   --   },
-  --{
-  --  "phha/zenburn.nvim",
-  --  name = "zenburn",
-  --  opts = {
-  ----    transparent_background = true,
-  --    lualine = true,
-  --  },
-  --},
+  -- {
+  --   "phha/zenburn.nvim",
+  --   name = "zenburn",
+  --   opts = {
+  --     transparent_background = true,
+  --     lualine = true,
+  --   },
+  -- },
   {
     -- https://github.com/catppuccin/nvim
     "catppuccin/nvim",
@@ -63,9 +63,23 @@ return {
     },
   },
   {
+    "rebelot/kanagawa.nvim",
+    build = ":KanagawaCompile",
+    opts = {
+      compile = true,
+      dimInactive = true,
+      colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = function(_, opts)
-      opts.colorscheme = "catppuccin"
+      opts.colorscheme = "kanagawa"
     end,
   },
 }
