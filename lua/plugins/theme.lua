@@ -77,6 +77,8 @@ return {
               float = {
                 bg = "none",
                 bg_border = "none",
+                fg_border = "none",
+                fg = "none",
               },
             },
           },

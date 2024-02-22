@@ -1,13 +1,29 @@
 return {
   {
-    "TimUntersberger/neogit",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
     cmd = "Neogit",
-    keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
+    opts = {
+      signs = {
+        hunk = { "", "" },
+        item = { "", "" },
+        section = { "", "" },
+      },
+      integrations = {
+        diffview = true,
+      },
+    },
+    keys = {
+      { "<leader>gc", "<cmd>lua require('neogit').open({'commit'})<CR>", desc = "Git commit" },
+      { "<leader>gg", "<cmd>lua require('neogit').open()<CR>", desc = "Git commit" },
+    },
   },
   {
     "sindrets/diffview.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = "nvim-lua/plenary.nvim",
     cmd = {
       "DiffviewOpen",
       "DiffviewClose",
@@ -16,9 +32,41 @@ return {
       "DiffviewRefresh",
       "DiffviewFileHistory",
     },
+    opts = {
+      file_panel = {
+        position = "bottom",
+        height = 20,
+      },
+      hooks = {
+        view_opened = function()
+          local stdout = vim.loop.new_tty(1, false)
+          if stdout ~= nil then
+            stdout:write(
+              ("\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\"):format(
+                "DIFF_VIEW",
+                vim.fn.system({ "base64" }, "+4")
+              )
+            )
+            vim.cmd([[redraw]])
+          end
+        end,
+        view_closed = function()
+          local stdout = vim.loop.new_tty(1, false)
+          if stdout ~= nil then
+            stdout:write(
+              ("\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\"):format(
+                "DIFF_VIEW",
+                vim.fn.system({ "base64" }, "-1")
+              )
+            )
+            vim.cmd([[redraw]])
+          end
+        end,
+      },
+    },
     keys = {
-
-      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffviewOpen" },
+      { "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "DiffviewClose" },
     },
   },
   {
