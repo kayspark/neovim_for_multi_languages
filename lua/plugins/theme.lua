@@ -67,9 +67,21 @@ return {
     build = ":KanagawaCompile",
     opts = {
       compile = true,
-      dimInactive = true,
-      colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
       transparent = true,
+      dimInactive = false,
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+              float = {
+                bg = "none",
+                bg_border = "none",
+              },
+            },
+          },
+        },
+      },
       styles = {
         sidebars = "transparent",
         floats = "transparent",
