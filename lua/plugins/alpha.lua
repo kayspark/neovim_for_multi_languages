@@ -1,7 +1,3 @@
-if true then
-  return {}
-end
-
 return {
   "goolord/alpha-nvim",
   opts = function(_, opts)
@@ -12,8 +8,6 @@ return {
 	  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
 	  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 	  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-
-	                   [ @KayPark ]
     ]]
     opts.section.header.val = vim.split(logo, "\n", { trimempty = true })
 

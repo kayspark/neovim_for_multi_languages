@@ -1,12 +1,12 @@
 * A neovim configuration for multiple languages
 
-This configuration is based on execellent LazyVim and referred lunarvim from time to time.
+This configuration is based on execellent LazyVim and referred dotfiles from Josh medesky, from time to time.
 
 For those who is using multiple languages, neovim can be a excellent choice.
   This repository is for my workflow like below :
-  - SQL with oracle databse
+  - SQL with oracle databse : sqls for language server and vim-dadbod 
   - Java and C++ legacy projects
-  - zsh/fish/nushell/xml/html for rutine works
+  - zsh/fish/xml/html for rutine works
   - Exciting experiment projects with Rust, Json and typescripts.
 
 Installation instruction is same as LazyVim. Start with starter kit and add your preferred plugins by copying. lua/plugins/lsp directory can be ignored but I copied it due to reference and test purposes. Codes are not cleaned up yet but it will be keep updated weekly basis.
@@ -19,16 +19,16 @@ In language servers, key binding for code actions also mattered but seems not ca
 
 * references
 My journey started with:
- - [[https://github.com/LunarVim/nvim-basic-ide.git][neovim_basic_ide]]
+ - Tim Pope's vim-dadbod
  - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
  - LazyVim starter Kit
- - LunarVim configuration for c++ and java
 
 Dependencies:
--To be listed with homebrew listings.
+- To be listed with homebrew listings.
+- sqls seems not to be used with sqlfmt from homebrew. use pipx shandy-sqlfmt instead.
 
 Caution:
-- sqls and sqlls language server seems hard to configure for oracle. can be added some notes seperately later.
+- sqls were hard to configure for oracle, but found workarounds. Can be added some notes seperately later.
 - Snippet related configuration needs to be revisited. Very first start makes some error but can be resumeed without issue.
 
 * work in process

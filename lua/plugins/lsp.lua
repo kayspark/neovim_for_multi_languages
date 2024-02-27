@@ -17,7 +17,7 @@ return {
         "luacheck",
         "shellcheck",
         "css-lsp",
-        "sql-formatter",
+        "sqlfmt",
       },
     },
   },
@@ -86,7 +86,7 @@ return {
         },
       },
       setup = {
-        sqls_lsp = function()
+        sqls = function()
           require("lazyvim.util").lsp.on_attach(function(client, _)
             if client.name == "sqls" then
               client.server_capabilities.documentFormattingProvider = false
