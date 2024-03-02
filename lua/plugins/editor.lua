@@ -73,64 +73,20 @@ return {
   --   },
   -- },
   -- add more treesitter parsers
-  {
-    "nvim-orgmode/orgmode",
-    commit = "2cb04d704de2e205bdd0b52179d392c18bfad5be",
-    lazy = false,
-    ft = "org",
-    config = function()
-      require("orgmode").setup_ts_grammar()
-      require("orgmode").setup({
-        org_todo_keywords = { "🟡(t)", "🟢(p)", "🔴(h)", "|", "☑️(d)", "🟠(w)" },
-        org_todo_keyword_faces = {
-          --        DELEGATED = ':background #FFFFFF :slant italic :underline on',
-          TODO = ":background #000000 :foreground #E78284", -- overrides builtin color for `TODO` keyword
-        },
-        mappings = {
-          text_objects = {
-            inner_heading = "ic",
-            around_heading = "ac",
-            inner_subtree = "is",
-            around_subtree = "as",
-            inner_heading_from_root = "iC",
-            around_heading_from_root = "aC",
-            inner_subtree_from_root = "iS",
-            around_subtree_from_root = "aS",
-          },
-        },
-        org_agenda_files = { "~/Org/*.org", "~/Org/org-roam/**/*" },
-        org_default_notes_file = "~/Org/notes.org",
-        org_capture_templates = {
-          T = {
-            description = "Todo",
-            template = "* 🟡 %?\n %u",
-            target = "~/Org/todo.org",
-          },
-          n = {
-            description = "Notes",
-            template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?",
-            target = "~/Org/notes.org",
-          },
-        },
-      })
-    end,
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter",
-        event = "BufReadPost",
-        opts = function(_, opts)
-          -- add tsx and treesitter
-          vim.list_extend(opts.ensure_installed, { "org" })
-          opts.highlight = {
-            enable = true,
-            -- Required for spellcheck, some LaTex highlights and
-            -- code block highlights that do not have ts grammar
-            additional_vim_regex_highlighting = { "org" },
-          }
-        end,
-      },
-    },
-  },
+  -- {
+  --   "mrshmllow/orgmode-babel.nvim",
+  --   dependencies = {
+  --     "nvim-orgmode/orgmode",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   cmd = { "OrgExecute", "OrgTangle" },
+  --   opts = {
+  --     -- by default, none are enabled
+  --     langs = { "python", "lua", "cpp"},
+
+  --     -- paths to emacs packages to additionally load
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
