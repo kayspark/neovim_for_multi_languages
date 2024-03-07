@@ -1,4 +1,3 @@
-local Util = require("lazyvim.util")
 local home = vim.fn.expand("$HOME")
 
 return {
@@ -25,5 +24,6 @@ return {
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
   },
+  -- add toggleterm
   { "akinsho/toggleterm.nvim", config = true },
 }
