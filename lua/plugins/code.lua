@@ -1,7 +1,6 @@
 local home = vim.fn.expand("$HOME")
 
 return {
-  -- add symbols-outline
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
@@ -18,12 +17,12 @@ return {
       "nvim-telescope/telescope.nvim",
     },
   },
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
-  },
+  -- {
+  --   "simrat39/outline.nvim",
+  --   cmd = "outline",
+  --   keys = { { "<leader>cs", "<cmd>outline<cr>", desc = "Symbols Outline" } },
+  --   config = true,
+  -- },
   -- add toggleterm
   { "akinsho/toggleterm.nvim", config = true },
 }

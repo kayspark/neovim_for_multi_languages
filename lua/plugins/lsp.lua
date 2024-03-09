@@ -5,30 +5,46 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       ensure_installed = {
-        "stylua",
-        "lua_ls",
-        "sqls",
+        "cbfmt",
+        "clang-format",
         "codelldb",
-        "pyrignt",
+        "css-lsp",
+        "flake8",
+        "jdtls",
+        "lua_ls",
+        "luacheck",
+        "ruff_lsp",
+        "selene",
         "shellcheck",
         "shfmt",
-        "flake8",
-        "selene",
-        "luacheck",
-        "shellcheck",
-        "css-lsp",
-        "sqlfmt",
+        "sqlfluff",
+        "sqls",
+        "stylua",
       },
     },
   },
   {
-    "neovim/nvim-lspconfig",
+    "nvimtools/none-ls.nvim",
     event = "LazyFile",
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.root_dir = opts.root_dir
+        or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.code_actions.gitrebase,
+        nls.builtins.code_actions.gitsigns,
+        nls.builtins.code_actions.refactoring,
+        nls.builtins.formatting.cbfmt,
+        nls.builtins.formatting.clang_format,
+        nls.builtins.diagnostics.sqlfluff.with({
+          extra_args = { "--dialect", "oracle" }, -- change to your dialect
+        }),
+      })
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "nanotee/sqls.nvim",
     },
     ---@class PluginLspOpts
@@ -38,7 +54,7 @@ return {
         underline = true,
         update_in_insert = false,
         virtual_text = {
-          spacing = 4,
+          spacing = 2,
           source = "if_many",
           prefix = "●",
           -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
@@ -84,6 +100,7 @@ return {
             version = "0.2.0",
           },
         },
+        jdtls = {},
       },
       setup = {
         sqls = function()
