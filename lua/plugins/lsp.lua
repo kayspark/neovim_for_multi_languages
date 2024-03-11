@@ -36,9 +36,15 @@ return {
         nls.builtins.code_actions.refactoring,
         nls.builtins.formatting.cbfmt,
         nls.builtins.formatting.clang_format,
+        nls.builtins.formatting.fish_indent,
+        nls.builtins.formatting.shfmt,
+        nls.builtins.formatting.sqlfluff.with({
+          extra_args = { "fix --dialect", "oracle" }, -- change to your dialect
+        }),
         nls.builtins.diagnostics.sqlfluff.with({
           extra_args = { "--dialect", "oracle" }, -- change to your dialect
         }),
+        nls.builtins.diagnostics.fish,
       })
     end,
   },
