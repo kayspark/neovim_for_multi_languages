@@ -8,9 +8,11 @@ return {
         "cbfmt",
         "clang-format",
         "codelldb",
+        "jdtls",
         "css-lsp",
         "flake8",
-        "jdtls",
+        "fish",
+        "fish_indent",
         "lua_ls",
         "luacheck",
         "ruff_lsp",
@@ -30,10 +32,16 @@ return {
       local nls = require("null-ls")
       opts.root_dir = opts.root_dir
         or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
-      opts.sources = vim.list_extend(opts.sources or {}, {
+      opts.sources = vim.list_extend({
         nls.builtins.code_actions.gitrebase,
-        nls.builtins.code_actions.gitsigns,
-        nls.builtins.code_actions.refactoring,
+        nls.builtins.code_actions.gitsigns.with({
+          config = {
+            filter_actions = function(title)
+              return title:lower():match("blame") == nil -- filter out blame actions
+            end,
+          },
+        }),
+        -- nls.builtins.code_actions.ltrs,
         nls.builtins.formatting.cbfmt,
         nls.builtins.formatting.clang_format,
         nls.builtins.formatting.fish_indent,
@@ -41,11 +49,8 @@ return {
         nls.builtins.formatting.sqlfluff.with({
           extra_args = { "fix --dialect", "oracle" }, -- change to your dialect
         }),
-        nls.builtins.diagnostics.sqlfluff.with({
-          extra_args = { "--dialect", "oracle" }, -- change to your dialect
-        }),
         nls.builtins.diagnostics.fish,
-      })
+      }, opts.sources or {})
     end,
   },
   {
@@ -106,25 +111,16 @@ return {
             version = "0.2.0",
           },
         },
-        jdtls = {},
-      },
-      setup = {
-        sqls = function()
-          require("lazyvim.util").lsp.on_attach(function(client, _)
-            if client.name == "sqls" then
-              client.server_capabilities.documentFormattingProvider = false
-              require("sqls").on_attach(client, _)
-            end
-          end)
-        end,
-        ruff_lsp = function()
-          require("lazyvim.util").lsp.on_attach(function(client, _)
-            if client.name == "ruff_lsp" then
-              -- Disable hover in favor of Pyright
-              client.server_capabilities.hoverProvider = false
-            end
-          end)
-        end,
+        setup = {
+          sqls = function()
+            require("lazyvim.util").lsp.on_attach(function(client, _)
+              if client.name == "sqls" then
+                client.server_capabilities.documentFormattingProvider = false
+                require("sqls").on_attach(client, _)
+              end
+            end)
+          end,
+        },
       },
     },
   },

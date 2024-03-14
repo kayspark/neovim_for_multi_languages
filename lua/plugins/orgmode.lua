@@ -19,7 +19,7 @@ return {
       })
 
       require("orgmode").setup({
-        org_todo_keywords = { "🟡(t)", "🟢(p)", "🔴(h)", "|", "☑️(d)", "🟠(w)" },
+        org_todo_keywords = { "TODO(t)", "🟡(w)", "🟢(p)", "🔴(h)", "|", "✔(d)", "✘(c)" },
         org_todo_keyword_faces = {
           --        DELEGATED = ':background #FFFFFF :slant italic :underline on',
           TODO = ":background #000000 :foreground #E78284", -- overrides builtin color for `TODO` keyword
