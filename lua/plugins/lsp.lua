@@ -16,12 +16,12 @@ return {
         "lua_ls",
         "luacheck",
         "ruff_lsp",
-        "selene",
         "shellcheck",
         "shfmt",
+        "svelte-language-server",
+        "vue-language-server",
         "sqlfluff",
         "sqls",
-        "stylua",
       },
     },
   },
@@ -42,6 +42,9 @@ return {
           },
         }),
         -- nls.builtins.code_actions.ltrs,
+        nls.builtins.code_actions.gitsigns,
+        nls.builtins.code_actions.gitrebase,
+        nls.builtins.code_actions.refactoring,
         nls.builtins.formatting.cbfmt,
         nls.builtins.formatting.clang_format,
         nls.builtins.formatting.fish_indent,
@@ -110,16 +113,13 @@ return {
             to = "sqlls",
             version = "0.2.0",
           },
-        },
-        setup = {
-          sqls = function()
-            require("lazyvim.util").lsp.on_attach(function(client, _)
-              if client.name == "sqls" then
-                client.server_capabilities.documentFormattingProvider = false
-                require("sqls").on_attach(client, _)
-              end
-            end)
+          function_on_attach = function(client, _)
+            client.server_capabilities.documentFormattingProvider = false
+            require("sqls").on_attach(client, _)
           end,
+          function_capabilities = {
+            executeCommand = true,
+          },
         },
       },
     },

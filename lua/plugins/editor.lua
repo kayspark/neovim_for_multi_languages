@@ -109,6 +109,7 @@ return {
         "tsx",
         "toml",
         "typescript",
+        "svelte",
         "vim",
         "org",
         "yaml",
