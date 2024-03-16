@@ -18,8 +18,8 @@ In language servers, key binding for code actions also mattered but seems not ca
 
 
 * references
-My journey started with:
- - Tim Pope's vim-dadbod
+
+- Tim Pope's vim-dadbod
  - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
  - LazyVim starter Kit
 
@@ -32,5 +32,11 @@ Caution:
 - Snippet related configuration needs to be revisited. Very first start makes some error but can be resumeed without issue.
 
 * work in process
-- rust-analyzer and rust-tools are under testing.
-- sqls works for me though. it seems the only working sql language server for oracle in MacOS yet.
+- vue and typescript for front end development with neovim
+- rust and json for backend development with neovim
+- sqls and vim-dadbod for database
+
+* daily usage tips
+  * searches
+    * search files with telescope : space + f + f, then type file name
+    * Ctrl + q to move search files to quickfix list

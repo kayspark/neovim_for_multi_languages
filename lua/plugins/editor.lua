@@ -11,6 +11,20 @@ return {
   --   end,
   -- },
   {
+    "echasnovski/mini.surround",
+    opts = {
+      mappings = {
+        add = "sd",
+        delete = "sx",
+        find = "sf",
+        find_left = "sF",
+        highlight = "sh",
+        replace = "ss",
+        update_n_lines = "sn",
+      },
+    },
+  },
+  {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
@@ -100,6 +114,7 @@ return {
         "jsonc",
         "lua",
         "markdown",
+        "mermaid",
         "markdown_inline",
         "python",
         "query",

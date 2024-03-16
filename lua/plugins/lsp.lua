@@ -13,8 +13,9 @@ return {
         "flake8",
         "fish",
         "fish_indent",
+        "graphql",
         "lua_ls",
-        "luacheck",
+        "stylelua",
         "ruff_lsp",
         "shellcheck",
         "shfmt",
@@ -22,87 +23,61 @@ return {
         "vue-language-server",
         "sqlfluff",
         "sqls",
+        "sqlls",
+        "yamlls",
       },
     },
   },
   {
     "nvimtools/none-ls.nvim",
     event = "LazyFile",
+    enabled = false,
     opts = function(_, opts)
-      local nls = require("null-ls")
+      local nls = require("none-ls")
       opts.root_dir = opts.root_dir
-        or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
+        or require("none-ls.utils").root_pattern(".none-ls-root", ".neoconf.json", "Makefile", ".git")
       opts.sources = vim.list_extend({
-        nls.builtins.code_actions.gitrebase,
-        nls.builtins.code_actions.gitsigns.with({
-          config = {
-            filter_actions = function(title)
-              return title:lower():match("blame") == nil -- filter out blame actions
-            end,
-          },
-        }),
         -- nls.builtins.code_actions.ltrs,
         nls.builtins.code_actions.gitsigns,
-        nls.builtins.code_actions.gitrebase,
         nls.builtins.code_actions.refactoring,
         nls.builtins.formatting.cbfmt,
         nls.builtins.formatting.clang_format,
         nls.builtins.formatting.fish_indent,
         nls.builtins.formatting.shfmt,
+        nls.builtins.formatting.mdformat,
+        nls.builtins.formatting.stylelua,
+        nls.builtins.formatting.prettier,
         nls.builtins.formatting.sqlfluff.with({
           extra_args = { "fix --dialect", "oracle" }, -- change to your dialect
         }),
-        nls.builtins.diagnostics.fish,
+        nls.builtins.diagnostics.shellcheck,
       }, opts.sources or {})
     end,
   },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "pmizio/typescript-tools.nvim",
       "nanotee/sqls.nvim",
     },
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 2,
-          source = "if_many",
-          prefix = "●",
-          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-          -- prefix = "icons",
-        },
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = require("lazyvim.config").icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = require("lazyvim.config").icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = require("lazyvim.config").icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = require("lazyvim.config").icons.diagnostics.Info,
-          },
-        },
-      },
-      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-      -- Be aware that you also will need to properly configure your LSP server to
-      -- provide the inlay hints.
       inlay_hints = {
-        enabled = false,
-      },
-      -- add any global capabilities here
-      capabilities = {},
-      -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
-      -- but can be also overridden when specified
-      format = {
-        formatting_options = nil,
-        timeout_ms = nil,
+        enabled = true,
       },
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
+        eslint = {},
+        volar = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              keyOrdering = false,
+            },
+          },
+        },
         sqls = {
           cmd = { "sqls" },
           filetypes = { "sql", "oracle" },
@@ -113,14 +88,55 @@ return {
             to = "sqlls",
             version = "0.2.0",
           },
-          function_on_attach = function(client, _)
+          on_attach = function(client, _)
             client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.executeCommand = true
             require("sqls").on_attach(client, _)
           end,
-          function_capabilities = {
-            executeCommand = true,
-          },
         },
+      },
+      setup = {
+        clangd = function(_, opts)
+          opts.capabilities.offsetEncoding = { "utf-16" }
+        end,
+        eslint = function()
+          require("lazyvim.util").lsp.on_attach(function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            elseif client.name == "tsserver" then
+              client.server_capabilities.documentFormattingProvider = false
+            end
+          end)
+        end,
+        tsserver = function(_, opts)
+          local neoconf = require("neoconf")
+          local lspconfig = require("lspconfig")
+          local root_dir = lspconfig.util.root_pattern("src/App.vue")
+          if neoconf.get("is-volar-project") or root_dir() then
+            lspconfig["volar"].setup({
+              server = opts,
+              settings = {},
+            })
+
+            require("typescript-tools").setup({
+              server = opts,
+              settings = {
+                tsserver_plugins = {
+                  "@vue/typescript-plugin",
+                },
+              },
+              filetypes = {
+                "javascript",
+                "typescript",
+              },
+            })
+          else
+            require("typescript-tools").setup({
+              server = opts,
+            })
+          end
+          return true
+        end,
       },
     },
   },

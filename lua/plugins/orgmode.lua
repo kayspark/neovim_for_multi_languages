@@ -37,21 +37,21 @@ return {
           },
         },
         emacs_config = {
-          excutable_path = "~/.emacs.d/bin/emacs",
-          config_path = "~/.congig/doom/config.el",
+          excutable_path = "/usr/local/bin/emacsclient -c -a emacs",
+          config_path = "~/.dotfiles/.doom.d/init.el",
         },
         org_agenda_files = { "~/org/*.org", "~/org/org-roam/**/*" },
         org_default_notes_file = "~/org/notes.org",
         org_capture_templates = {
           T = {
             description = "Todo",
-            template = "* 🟡 %?\n %u",
-            target = "~/Org/todo.org",
+            template = "* TODO %?\n %u",
+            target = "~/org/todo.org",
           },
           n = {
             description = "Notes",
             template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?",
-            target = "~/Org/notes.org",
+            target = "~/org/notes.org",
           },
         },
       })
