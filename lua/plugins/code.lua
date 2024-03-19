@@ -25,4 +25,6 @@ return {
   -- },
   -- add toggleterm
   { "akinsho/toggleterm.nvim", config = true },
+  -- nvim-nio
+  { "nvim-neotest/nvim-nio" },
 }
