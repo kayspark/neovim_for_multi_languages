@@ -1,8 +1,8 @@
 * A neovim configuration for multiple languages
 
-This configuration is based on execellent LazyVim and referred dotfiles from Josh medesky, from time to time.
+This configuration is referring  LazyVim and referred dotfiles from Josh medesky, from time to time.
 
-For those who is using multiple languages, neovim can be a excellent choice.
+For those who is using multiple languages, neovim can be a good choice.
   This repository is for my workflow like below :
   - SQL with oracle databse : sqls for language server and vim-dadbod 
   - Java and C++ legacy projects
