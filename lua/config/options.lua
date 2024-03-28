@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 -- set deault input method to koreans
+
+vim.g.root_spec = { "lsp", { ".git", "lua", ".project", ".projectile" }, "cwd" }
 vim.g.input_method_default = "korean"
 local opt = vim.opt
 

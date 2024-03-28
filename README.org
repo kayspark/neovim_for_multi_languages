@@ -25,7 +25,7 @@ In language servers, key binding for code actions also mattered but seems not ca
 
 Dependencies:
 - To be listed with homebrew listings.
-- sqls seems not to be used with sqlfmt from homebrew. use pipx shandy-sqlfmt instead.
+- *sqls* seems not to be used with sqlfmt from homebrew. use pipx shandy-sqlfmt instead.
 
 Caution:
 - sqls were hard to configure for oracle, but found workarounds. Can be added some notes seperately later.

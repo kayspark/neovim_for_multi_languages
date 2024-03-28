@@ -27,7 +27,7 @@ return {
       transparent_background = true,
       integrations = {
         aerial = true,
-        alpha = true,
+        --alpha = true,
         cmp = true,
         dashboard = true,
         flash = true,

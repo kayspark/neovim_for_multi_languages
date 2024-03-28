@@ -21,6 +21,7 @@ return {
         "shfmt",
         "svelte-language-server",
         "vue-language-server",
+        "r-language-server",
         "sqlfluff",
         "sqls",
         "sqlls",
@@ -85,8 +86,7 @@ return {
         tsserver = function(_, opts)
           local neoconf = require("neoconf")
           local lspconfig = require("lspconfig")
-          local root_dir = lspconfig.util.root_pattern("src/App.vue")
-          if neoconf.get("is-volar-project") or root_dir() then
+          if neoconf.get("is-volar-project") then
             lspconfig["volar"].setup({
               server = opts,
               settings = {},
