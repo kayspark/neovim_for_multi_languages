@@ -7,6 +7,7 @@
     "lazyvim.plugins.extras.editor.leap",
     "lazyvim.plugins.extras.editor.mini-files",
     "lazyvim.plugins.extras.editor.navic",
+    "lazyvim.plugins.extras.editor.trouble-v3",
     "lazyvim.plugins.extras.formatting.black",
     "lazyvim.plugins.extras.lang.ansible",
     "lazyvim.plugins.extras.lang.clangd",
@@ -23,11 +24,10 @@
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.lazyrc",
     "lazyvim.plugins.extras.util.dot",
-    "lazyvim.plugins.extras.vscode",
-    "lazyvim.plugins.extras.editor.outline"
+    "lazyvim.plugins.extras.vscode"
   ],
   "news": {
-    "NEWS.md": "2850",
+    "NEWS.md": "3314",
     "doc/news.txt": "13995"
   },
   "version": 3

@@ -17,12 +17,6 @@ return {
       "nvim-telescope/telescope.nvim",
     },
   },
-  -- {
-  --   "simrat39/outline.nvim",
-  --   cmd = "outline",
-  --   keys = { { "<leader>cs", "<cmd>outline<cr>", desc = "Symbols Outline" } },
-  --   config = true,
-  -- },
   -- add toggleterm
   { "akinsho/toggleterm.nvim", config = true },
   -- nvim-nio

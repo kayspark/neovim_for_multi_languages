@@ -19,10 +19,15 @@ return {
       })
 
       require("orgmode").setup({
-        org_todo_keywords = { "TODO(t)", "WAIT(w)", "PROC(p)", "HOLD(h)", "|", "✔(d)", "✘(c)" },
+        org_todo_keywords = { "TODO(t)", "WAIT(w)", "PROC(p)", "HOLD(h)", "|", "DONE(d)", "CANCEL(c)" },
         org_todo_keyword_faces = {
           --        DELEGATED = ':background #FFFFFF :slant italic :underline on',
           TODO = ":background #000000 :foreground #E78284", -- overrides builtin color for `TODO` keyword
+          WAIT = ":background #000000 :foreground #E7C664", -- overrides builtin color for `WAIT` keyword
+          PROC = ":background #000000 :foreground #E7C664", -- overrides builtin color for `PROC` keyword
+          HOLD = ":background #000000 :foreground #E7C664", -- overrides builtin color for `HOLD` keyword
+          DONE = ":background #000000 :foreground #86DC2F", -- overrides builtin color for `DONE` keyword
+          CANCEL = ":background #000000 :foreground #E78284", -- overrides builtin color for `CANCEL` keyword
         },
         mappings = {
           text_objects = {

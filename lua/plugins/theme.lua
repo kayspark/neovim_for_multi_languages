@@ -1,23 +1,4 @@
 return {
-  --   {
-  --     "rebelot/kanagawa.nvim",
-  --     --    "folke/tokyonight.nvim",
-  --     opts = {
-  --       transparent = true,
-  --       styles = {
-  --         sidebars = "transparent",
-  --         floats = "transparent",
-  --       },
-  --     },
-  --   },
-  -- {
-  --   "phha/zenburn.nvim",
-  --   name = "zenburn",
-  --   opts = {
-  --     transparent_background = true,
-  --     lualine = true,
-  --   },
-  -- },
   {
     -- https://github.com/catppuccin/nvim
     "catppuccin/nvim",
