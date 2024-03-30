@@ -1,5 +1,11 @@
 return {
   {
+    "LazyVim/LazyVim",
+    opts = function(_, opts)
+      opts.colorscheme = "kanagawa-dragon"
+    end,
+  },
+  {
     -- https://github.com/catppuccin/nvim
     "catppuccin/nvim",
     name = "catppuccin",
@@ -70,11 +76,5 @@ return {
         floats = "transparent",
       },
     },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = function(_, opts)
-      opts.colorscheme = "kanagawa"
-    end,
   },
 }
