@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = function(_, opts)
-      opts.colorscheme = "kanagawa-dragon"
+      opts.colorscheme = "kanagawa"
     end,
   },
   {
