@@ -9,15 +9,6 @@ return {
     },
     event = "BufReadPre",
     config = function()
-      require("orgmode").setup_ts_grammar()
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = { "org" },
-        },
-        ensure_installed = "org",
-      })
-
       require("orgmode").setup({
         org_todo_keywords = { "TODO(t)", "WAIT(w)", "PROC(p)", "HOLD(h)", "|", "DONE(d)", "CANCEL(c)" },
         org_todo_keyword_faces = {

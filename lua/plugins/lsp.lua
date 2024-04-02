@@ -24,7 +24,6 @@ return {
         "r-language-server",
         "sqlfluff",
         "sqls",
-        "sqlls",
         "yamlls",
       },
     },
@@ -56,13 +55,6 @@ return {
         sqls = {
           cmd = { "sqls" },
           filetypes = { "sql", "oracle" },
-          root_dir = function(fname)
-            return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
-          end,
-          deprecate = {
-            to = "sqlls",
-            version = "0.2.0",
-          },
           on_attach = function(client, _)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.executeCommand = true
