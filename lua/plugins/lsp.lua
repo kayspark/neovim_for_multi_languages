@@ -15,6 +15,7 @@ return {
         "fish_indent",
         "graphql",
         "lua_ls",
+        "pyright",
         "stylelua",
         "ruff_lsp",
         "shellcheck",
