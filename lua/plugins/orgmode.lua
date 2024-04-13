@@ -33,7 +33,7 @@ return {
           },
         },
         emacs_config = {
-          excutable_path = "/usr/local/bin/emacsclient -c -a emacs",
+          excutable_path = "/usr/local/bin/emacs",
           config_path = "~/.dotfiles/.doom.d/init.el",
         },
         org_agenda_files = { "~/org/*.org", "~/org/org-roam/**/*" },
