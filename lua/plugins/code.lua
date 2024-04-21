@@ -7,7 +7,7 @@ return {
     config = function()
       require("chatgpt").setup({
         api_key_cmd = "cat " .. home .. "/chatgpt_key.txt",
-        --   api_key_cmd = "gpg --decrypt " .. home .. "/chatgpt_key.txt.gpg",
+        -- api_key_cmd = "gpg --decrypt " .. home .. "/chatgpt_key.txt.gpg",
       })
     end,
     dependencies = {
