@@ -16,6 +16,7 @@ return {
         "c",
         "cpp",
         "html",
+        "java",
         "javascript",
         "json",
         "jsonc",

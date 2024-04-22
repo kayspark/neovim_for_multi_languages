@@ -4,7 +4,7 @@ This configuration is referring  LazyVim and referred dotfiles from Josh medesky
 
 For those who is using multiple languages, neovim can be a good choice.
   This repository is for my workflow like below :
-  - SQL with oracle databse : sqls for language server and vim-dadbod 
+  - SQL with oracle databse : sqls for language server and vim-dadbod
   - Java and C++ legacy projects
   - zsh/fish/xml/html for rutine works
   - Exciting experiment projects with Rust, Json and typescripts.
@@ -40,3 +40,4 @@ Caution:
   * searches
     * search files with telescope : space + f + f, then type file name
     * Ctrl + q to move search files to quickfix list
+    * Ctrl + n/p to move quickfix list

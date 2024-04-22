@@ -16,8 +16,11 @@
       "sqlls": {
         "enabled": true
       },
-      "jdtls": {
+      "java_languabe_server": {
         "enabled": true
+      },
+      "jdtls": {
+        "enabled": false
       },
       "clangd": {
         "enabled": true

@@ -8,12 +8,12 @@ return {
         "cbfmt",
         "clang-format",
         "codelldb",
-        "jdtls",
         "css-lsp",
         "flake8",
         "fish",
         "fish_indent",
         "graphql",
+        "java-language-server",
         "lua_ls",
         "pyright",
         "stylelua",
@@ -44,6 +44,7 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
+        java_language_server = {},
         eslint = {},
         volar = {},
         yamlls = {
