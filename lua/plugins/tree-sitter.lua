@@ -1,0 +1,41 @@
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    vim.filetype.add({
+      filename = {
+        ["envrc"] = "bash",
+      },
+    }),
+    opts = {
+      ensure_installed = {
+        "bash",
+        "c",
+        "cpp",
+        "fish",
+        "html",
+        "java",
+        "javascript",
+        "json",
+        "jsonc",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "mermaid",
+        "org",
+        "python",
+        "query",
+        "regex",
+        "rust",
+        "sql",
+        "svelte",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "vue",
+        "yaml",
+      },
+    },
+  },
+}
