@@ -18,6 +18,7 @@ return {
         "json",
         "jsonc",
         "lua",
+        "kdl",
         "markdown",
         "markdown_inline",
         "mermaid",

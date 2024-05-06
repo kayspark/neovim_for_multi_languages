@@ -31,7 +31,7 @@ return {
     -- Customize formatters
     formatters = {
       sqlfluff = {
-        args = { "fix", "--dialect", "oracle", "-" },
+        args = { "fix", "--dialect", "oracle" },
       },
       shfmt = {
         prepend_args = { "-i", "2" },
