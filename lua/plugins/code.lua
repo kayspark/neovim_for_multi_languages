@@ -1,6 +1,7 @@
 local home = vim.fn.expand("$HOME")
 
 return {
+
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
