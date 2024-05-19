@@ -26,7 +26,7 @@ opt.shell = "fish"
 opt.inccommand = "split"
 opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 opt.smarttab = true
-opt.breakindent = true
+--opt.breakindent = true
 opt.shiftwidth = 2
 opt.tabstop = 2
 opt.path:append({ "**" }) -- Finding files - Search down into subfolders
