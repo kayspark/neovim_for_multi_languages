@@ -13,14 +13,8 @@
       "sqls": {
         "enabled": true
       },
-      "sqlls": {
-        "enabled": true
-      },
-      "java_languabe_server": {
-        "enabled": true
-      },
       "jdtls": {
-        "enabled": false
+        "enabled": true
       },
       "clangd": {
         "enabled": true

@@ -14,6 +14,7 @@ return {
         "fish_indent",
         "graphql",
         "java-language-server",
+        "jdtls",
         "lua_ls",
         "pyright",
         "stylelua",
@@ -35,16 +36,13 @@ return {
       "pmizio/typescript-tools.nvim",
       "nanotee/sqls.nvim",
     },
-    ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
       inlay_hints = {
         enabled = true,
       },
-      -- LSP Server Settings
-      ---@type lspconfig.options
       servers = {
-        java_language_server = {},
+        jdtls = {},
         eslint = {},
         volar = {},
         yamlls = {

@@ -3,6 +3,8 @@
     "lazyvim.plugins.extras.coding.codeium",
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.tabnine",
+    "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.editor.dial",
     "lazyvim.plugins.extras.editor.harpoon2",
     "lazyvim.plugins.extras.editor.leap",
     "lazyvim.plugins.extras.editor.mini-files",
@@ -30,8 +32,8 @@
     "lazyvim.plugins.extras.editor.trouble-v3"
   ],
   "news": {
-    "NEWS.md": "4944",
-    "doc/news.txt": "13995"
+    "NEWS.md": "4964",
+    "doc/news.txt": "24447"
   },
   "version": 4
 }
