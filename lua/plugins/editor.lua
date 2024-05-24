@@ -8,6 +8,7 @@ return {
   --      })
   --    end,
   --  },
+  { "tris203/precognition.nvim", config = {} },
   {
     "folke/which-key.nvim",
     opts = {
