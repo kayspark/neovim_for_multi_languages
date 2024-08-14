@@ -76,31 +76,24 @@ return {
           end)
         end,
         tsserver = function(_, opts)
-          local neoconf = require("neoconf")
           local lspconfig = require("lspconfig")
-          if neoconf.get("is-volar-project") then
-            lspconfig["volar"].setup({
-              server = opts,
-              settings = {},
-            })
+          lspconfig["volar"].setup({
+            server = opts,
+            settings = {},
+          })
 
-            require("typescript-tools").setup({
-              server = opts,
-              settings = {
-                tsserver_plugins = {
-                  "@vue/typescript-plugin",
-                },
+          require("typescript-tools").setup({
+            server = opts,
+            settings = {
+              tsserver_plugins = {
+                "@vue/typescript-plugin",
               },
-              filetypes = {
-                "javascript",
-                "typescript",
-              },
-            })
-          else
-            require("typescript-tools").setup({
-              server = opts,
-            })
-          end
+            },
+            filetypes = {
+              "javascript",
+              "typescript",
+            },
+          })
           return true
         end,
       },
