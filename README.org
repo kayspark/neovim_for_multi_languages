@@ -32,7 +32,6 @@ Caution:
 - Snippet related configuration needs to be revisited. Very first start makes some error but can be resumeed without issue.
 
 * work in process
-- vue and typescript for front end development with neovim
 - rust and json for backend development with neovim
 - sqls and vim-dadbod for database
 

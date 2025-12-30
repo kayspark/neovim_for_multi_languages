@@ -1,32 +1,16 @@
 return {
   -- add any tools you want to have installed below
+  --
   {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
     opts = {
       ensure_installed = {
-        "cbfmt",
-        "clang-format",
-        "codelldb",
-        "css-lsp",
-        "flake8",
-        "fish",
-        "fish_indent",
-        "graphql",
-        "java-language-server",
-        "jdtls",
         "lua_ls",
-        "pyright",
-        "stylelua",
-        "ruff_lsp",
-        "shellcheck",
-        "shfmt",
-        "svelte-language-server",
-        "vue-language-server",
-        "r-language-server",
-        "sqlfluff",
         "sqls",
-        "yamlls",
       },
     },
   },
@@ -41,60 +25,13 @@ return {
       inlay_hints = {
         enabled = true,
       },
-      servers = {
-        jdtls = {},
-        eslint = {},
-        volar = {},
-        yamlls = {
-          settings = {
-            yaml = {
-              keyOrdering = false,
-            },
-          },
-        },
-        sqls = {
-          cmd = { "sqls" },
-          filetypes = { "sql", "oracle" },
-          on_attach = function(client, _)
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.executeCommand = true
-            require("sqls").on_attach(client, _)
-          end,
-        },
-      },
-      setup = {
-        clangd = function(_, opts)
-          opts.capabilities.offsetEncoding = { "utf-16" }
-        end,
-        eslint = function()
-          require("lazyvim.util").lsp.on_attach(function(client)
-            if client.name == "eslint" then
-              client.server_capabilities.documentFormattingProvider = true
-            elseif client.name == "tsserver" then
-              client.server_capabilities.documentFormattingProvider = false
-            end
-          end)
-        end,
-        tsserver = function(_, opts)
-          local lspconfig = require("lspconfig")
-          lspconfig["volar"].setup({
-            server = opts,
-            settings = {},
-          })
-
-          require("typescript-tools").setup({
-            server = opts,
-            settings = {
-              tsserver_plugins = {
-                "@vue/typescript-plugin",
-              },
-            },
-            filetypes = {
-              "javascript",
-              "typescript",
-            },
-          })
-          return true
+      sqls = {
+        cmd = { "sqls" },
+        filetypes = { "sql", "oracle" },
+        on_attach = function(client, _)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.executeCommand = true
+          require("sqls").on_attach(client, _)
         end,
       },
     },
