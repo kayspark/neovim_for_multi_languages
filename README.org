@@ -17,26 +17,28 @@ In language servers, key binding for code actions also mattered but seems not ca
 
 
 
-* references
-
-- Tim Pope's vim-dadbod
- - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
- - LazyVim starter Kit
-
-Dependencies:
-- To be listed with homebrew listings.
-- *sqls* seems not to be used with sqlfmt from homebrew. use pipx shandy-sqlfmt instead.
-
-Caution:
-- sqls were hard to configure for oracle, but found workarounds. Can be added some notes seperately later.
-- Snippet related configuration needs to be revisited. Very first start makes some error but can be resumeed without issue.
-
 * work in process
 - rust and json for backend development with neovim
 - sqls and vim-dadbod for database
+
+* Recent Changes
+** 2026-02-02
+ - **Configuration Health Check & Cleanup**:
+   - Reviewed and updated the configuration to align with the latest LazyVim standards.
+   - Cleaned up `lua/plugins/database.lua` to remove redundant settings.
+ - **Plugin Roles Clarification**:
+   - Kept both `sqls` (Language Server for code intelligence) and `vim-dadbod` (database client for query execution) as they serve complementary roles for a complete SQL development environment.
+ - **LazyVim Extras Update**:
+   - The configuration now uses `aerial` instead of the deprecated `navic` for the symbols outline. It's recommended to remove the `navic` extra via the `:LazyExtras` command to avoid conflicts.
 
 * daily usage tips
   * searches
     * search files with telescope : space + f + f, then type file name
     * Ctrl + q to move search files to quickfix list
     * Ctrl + n/p to move quickfix list
+
+* references
+
+- Tim Pope's vim-dadbod
+ - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
+ - LazyVim starter Kit
