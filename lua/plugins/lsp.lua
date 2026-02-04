@@ -21,18 +21,19 @@ return {
       "nanotee/sqls.nvim",
     },
     opts = {
-      -- options for vim.diagnostic.config()
       inlay_hints = {
         enabled = true,
       },
-      sqls = {
-        cmd = { "sqls" },
-        filetypes = { "sql", "oracle" },
-        on_attach = function(client, _)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.executeCommand = true
-          require("sqls").on_attach(client, _)
-        end,
+      servers = {
+        sqls = {
+          cmd = { "sqls" },
+          filetypes = { "sql" },
+          on_attach = function(client, _)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.executeCommand = true
+            require("sqls").on_attach(client, _)
+          end,
+        },
       },
     },
   },
