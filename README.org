@@ -25,6 +25,7 @@ In language servers, key binding for code actions also mattered but seems not ca
 ** 2026-02-06
  - Removed `sqls` integration from `lua/plugins/lsp.lua` and `neoconf.json`.
  - SQL workflow now uses `vim-dadbod` and `vim-dadbod-completion` only.
+ - Added a Git signing runbook for contributors and agents: `docs/ops/git-signing.md`.
 
 ** 2026-02-02
  - **Configuration Health Check & Cleanup**:
@@ -93,5 +94,6 @@ This list includes all custom key maps defined in this repository. Default LazyV
 * references
 
 - Tim Pope's vim-dadbod
+- Git signing runbook: `docs/ops/git-signing.md`
  - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
  - LazyVim starter Kit
