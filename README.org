@@ -4,7 +4,7 @@ This configuration is referring  LazyVim and referred dotfiles from Josh medesky
 
 For those who is using multiple languages, neovim can be a good choice.
   This repository is for my workflow like below :
-  - SQL with oracle databse : sqls for language server and vim-dadbod
+  - SQL with oracle database : vim-dadbod for query execution and completion
   - Java and C++ legacy projects
   - zsh/fish/xml/html for rutine works
   - Exciting experiment projects with Rust, Json and typescripts.
@@ -19,23 +19,76 @@ In language servers, key binding for code actions also mattered but seems not ca
 
 * work in process
 - rust and json for backend development with neovim
-- sqls and vim-dadbod for database
+- vim-dadbod for database
 
 * Recent Changes
+** 2026-02-06
+ - Removed `sqls` integration from `lua/plugins/lsp.lua` and `neoconf.json`.
+ - SQL workflow now uses `vim-dadbod` and `vim-dadbod-completion` only.
+
 ** 2026-02-02
  - **Configuration Health Check & Cleanup**:
    - Reviewed and updated the configuration to align with the latest LazyVim standards.
    - Cleaned up `lua/plugins/database.lua` to remove redundant settings.
- - **Plugin Roles Clarification**:
-   - Kept both `sqls` (Language Server for code intelligence) and `vim-dadbod` (database client for query execution) as they serve complementary roles for a complete SQL development environment.
  - **LazyVim Extras Update**:
    - The configuration now uses `aerial` instead of the deprecated `navic` for the symbols outline. It's recommended to remove the `navic` extra via the `:LazyExtras` command to avoid conflicts.
 
-* daily usage tips
-  * searches
-    * search files with telescope : space + f + f, then type file name
-    * Ctrl + q to move search files to quickfix list
-    * Ctrl + n/p to move quickfix list
+* key maps
+This list includes all custom key maps defined in this repository. Default LazyVim key maps are not listed.
+
+** general
+| Mode | Key        | Action                              |
+|------+------------+-------------------------------------|
+| n    | <leader>bj | Next buffer                         |
+| n    | <leader>bk | Previous buffer                     |
+| n    | <leader>bn | Next buffer                         |
+| n    | <leader>bp | Previous buffer                     |
+| n    | <leader>bb | Telescope buffers (MRU/last used)   |
+| v    | <leader>y  | Yank selection to system clipboard  |
+| n    | <leader>]  | Run :Gen                            |
+| v    | <leader>]  | Run :Gen on selection               |
+| v    | <C-s>      | Sort selected lines                 |
+| v    | <leader>rr | Replace selected text in whole file |
+| v    | J          | Move selected line(s) down          |
+| v    | K          | Move selected line(s) up            |
+
+** git
+| Mode | Key        | Action                 |
+|------+------------+------------------------|
+| n    | <leader>gg | Neogit status          |
+| n    | <leader>gc | Neogit commit          |
+| n    | <leader>gd | Diffview open          |
+| n    | <leader>gD | Diffview close         |
+| n    | ]g         | Next git hunk          |
+| n    | [g         | Previous git hunk      |
+| n    | gs         | Stage hunk             |
+| n    | gS         | Stage buffer           |
+| n    | gx         | Reset hunk             |
+| n    | gX         | Reset buffer           |
+| n    | gu         | Undo stage hunk        |
+| n    | gh         | Preview hunk           |
+| n    | gb         | Stage buffer           |
+
+** tmux navigator
+| Mode | Key    | Action                      |
+|------+--------+-----------------------------|
+| n    | <C-h>  | TmuxNavigateLeft            |
+| n    | <C-j>  | TmuxNavigateDown            |
+| n    | <C-k>  | TmuxNavigateUp              |
+| n    | <C-l>  | TmuxNavigateRight           |
+| n    | <C-\>  | TmuxNavigatePrevious        |
+
+** orgmode text objects
+| Mode | Key | Action                     |
+|------+-----+----------------------------|
+| o/x  | ic  | Inner heading              |
+| o/x  | ac  | Around heading             |
+| o/x  | is  | Inner subtree              |
+| o/x  | as  | Around subtree             |
+| o/x  | iC  | Inner heading from root    |
+| o/x  | aC  | Around heading from root   |
+| o/x  | iS  | Inner subtree from root    |
+| o/x  | aS  | Around subtree from root   |
 
 * references
 
