@@ -79,6 +79,20 @@ This list includes all custom key maps defined in this repository. Default LazyV
 | n    | <C-l>  | TmuxNavigateRight           |
 | n    | <C-\>  | TmuxNavigatePrevious        |
 
+** spell checking
+Spell checking is disabled globally and enabled for prose filetypes (markdown, text, gitcommit, org).
+Korean (Hangul) and other CJK characters are skipped via ~spelllang = { "en", "cjk" }~.
+Personal dictionary is stored in ~spell/en.utf-8.add~.
+
+| Mode | Key | Action                          |
+|------+-----+---------------------------------|
+| n    | zg  | Add word to personal dictionary |
+| n    | zw  | Mark word as wrong              |
+| n    | zug | Undo zg (remove good word)      |
+| n    | ]s  | Jump to next misspelled word    |
+| n    | [s  | Jump to previous misspelled     |
+| n    | z=  | Show spelling suggestions       |
+
 ** orgmode text objects
 | Mode | Key | Action                     |
 |------+-----+----------------------------|

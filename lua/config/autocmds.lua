@@ -30,16 +30,11 @@
 --   end,
 -- })
 
---vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
---  pattern = { "*.mdx", "*.md" },
---  callback = function()
---    vim.cmd([[set filetype=markdown wrap linebreak nolist nospell]])
---  end,
---})
---
---vim.api.nvim_create_autocmd({ "BufRead" }, {
---  pattern = { "*.conf" },
---  callback = function()
---    vim.cmd([[set filetype=sh]])
---  end,
---})
+-- Enable spell checking for prose filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit", "org" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = { "en", "cjk" }
+  end,
+})
