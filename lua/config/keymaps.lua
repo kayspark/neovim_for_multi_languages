@@ -14,6 +14,12 @@ vim.keymap.set(
   { desc = "Telescope buffers" }
 )
 
+-- increment/decrement (match Doom Emacs evil-numbers bindings)
+vim.keymap.set("n", "g=", "<C-a>", { desc = "Increment number" })
+vim.keymap.set("n", "g-", "<C-x>", { desc = "Decrement number" })
+vim.keymap.set("v", "g=", "g<C-a>", { desc = "Increment numbers sequentially" })
+vim.keymap.set("v", "g-", "g<C-x>", { desc = "Decrement numbers sequentially" })
+
 -- clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 
