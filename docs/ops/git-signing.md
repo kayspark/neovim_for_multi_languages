@@ -21,7 +21,7 @@ which pinentry
 GNUPG_HOME="$(gpgconf --list-dirs homedir)"
 mkdir -p "$GNUPG_HOME"
 cat > "$GNUPG_HOME/gpg-agent.conf" <<'EOF'
-pinentry-program /usr/local/bin/pinentry
+pinentry-program /opt/local/bin/pinentry
 default-cache-ttl 21600
 max-cache-ttl 86400
 EOF
