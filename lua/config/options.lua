@@ -15,6 +15,7 @@ opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
 opt.spell = false
+opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 opt.autoindent = true
 opt.smartindent = true
 opt.hlsearch = true
