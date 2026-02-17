@@ -22,6 +22,16 @@ In language servers, key binding for code actions also mattered but seems not ca
 - vim-dadbod for database
 
 * Recent Changes
+** 2026-02-17
+ - Git UI policy tightened to Neogit-first workflow.
+ - Disabled default LazyGit key bindings from LazyVim Snacks (`<leader>gg`, `<leader>gG`) to avoid confusion.
+ - Removed `ai.claudecode` extra (CLI workflow is primary).
+ - Commented out language extras for easy later enable:
+   - `lazyvim.plugins.extras.lang.rust`
+   - `lazyvim.plugins.extras.lang.typescript`
+   - `lazyvim.plugins.extras.lang.yaml`
+ - Re-enable by uncommenting entries in `lua/config/lazy.lua`, then run `:Lazy sync`.
+
 ** 2026-02-06
  - Removed `sqls` integration from `lua/plugins/lsp.lua` and `neoconf.json`.
  - SQL workflow now uses `vim-dadbod` and `vim-dadbod-completion` only.
@@ -54,6 +64,8 @@ This list includes all custom key maps defined in this repository. Default LazyV
 | v    | K          | Move selected line(s) up            |
 
 ** git
+Neogit is the primary Git UI in this config. LazyGit integration is intentionally disabled.
+
 | Mode | Key        | Action                 |
 |------+------------+------------------------|
 | n    | <leader>gg | Neogit status          |
@@ -69,6 +81,54 @@ This list includes all custom key maps defined in this repository. Default LazyV
 | n    | gu         | Undo stage hunk        |
 | n    | gh         | Preview hunk           |
 | n    | gb         | Stage buffer           |
+
+*** Git workflow (Neogit + Diffview)
+This is the recommended day-to-day flow in this config.
+
+**** 1) Add / stage changes
+- Open Neogit status: ~<leader>gg~
+- Stage from Neogit status buffer (Magit-style) for file/hunk selection.
+- Or stage directly from code with gitsigns:
+  - ~gs~ stage hunk
+  - ~gS~ stage buffer
+  - ~gh~ preview hunk before staging
+
+**** 2) Commit
+- Open commit flow: ~<leader>gc~
+- Write commit message in the commit buffer.
+- Save and confirm commit from Neogit.
+- If commit signing is required, follow ~docs/ops/git-signing.md~.
+
+**** 3) Fetch / pull / rebase
+- Open Neogit: ~<leader>gg~
+- Use Neogit popups to run fetch/pull/rebase operations.
+- Tip: use ~?~ inside Neogit to see current buffer actions.
+
+**** 4) Review diff before merge
+- Open repository diff view: ~<leader>gd~ (DiffviewOpen)
+- Close diff view: ~<leader>gD~ (DiffviewClose)
+- Useful commands in command line:
+  - ~:DiffviewFileHistory~ for file/repo history diff
+  - ~:DiffviewToggleFiles~ to show/hide file panel
+  - ~:DiffviewRefresh~ after branch updates
+
+**** 5) Merge with diff
+- Fetch and checkout target branch in Neogit.
+- Open ~<leader>gd~ and review changed files before merge.
+- Run merge from Neogit popup.
+- If conflicts occur:
+  - Use Diffview to inspect both sides and conflict locations.
+  - Resolve in buffers, stage resolved files, then complete merge commit.
+
+**** 6) Push
+- Open Neogit: ~<leader>gg~
+- Use push popup/action to push current branch.
+- Prefer pushing only after diff review and clean status.
+
+**** Quick habits
+- Before commit: ~gh~ on important hunks + ~<leader>gd~ full diff pass.
+- Before push: confirm no unstaged/untracked surprises in Neogit status.
+- For history investigation: ~:DiffviewFileHistory %~ on current file.
 
 ** tmux navigator
 | Mode | Key    | Action                      |
