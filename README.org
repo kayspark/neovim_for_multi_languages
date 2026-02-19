@@ -153,6 +153,89 @@ Personal dictionary is stored in ~spell/en.utf-8.add~.
 | n    | [s  | Jump to previous misspelled     |
 | n    | z=  | Show spelling suggestions       |
 
+** Java (jdtls)
+jdtls (Eclipse JDT Language Server) is configured via =ftplugin/java.lua=, not through the standard mason-lspconfig auto-attach.
+This is the nvim-jdtls recommended approach because jdtls needs per-project workspace isolation and =start_or_attach()= semantics.
+
+| Mode | Key        | Action                |
+|------+------------+-----------------------|
+| n    | <leader>jd | Debug test class      |
+| n    | <leader>jm | Debug test method     |
+| n    | <leader>jr | Organize imports      |
+
+*** JDK version layering (real-world example: YTAP project)
+This config handles projects where production targets JDK 6/8 but jdtls itself requires JDK 21+.
+Three JDK roles must be separated:
+
+| Role                  | JDK   | Why                                                  |
+|-----------------------+-------+------------------------------------------------------|
+| jdtls runtime         | 22    | jdtls 1.40+ requires JDK 21 minimum                 |
+| Gradle daemon         | 8     | Gradle 7.6.x supports up to JDK 19; project needs 8 |
+| Project compile target | 6/8  | Production equipment PCs run JDK 6/8                 |
+
+**** How it works
+1. *jdtls process* runs on JDK 22 via =~/.config/bin/jdtls-java= wrapper.
+   The wrapper checks jenv first, then falls back through JDK 25/24/.../21 paths.
+   Must return JDK >= 21 or jdtls refuses to start.
+
+2. *Gradle import* uses JDK 8 via =java.import.gradle.java.home= setting.
+   Without this, jdtls spawns the Gradle daemon with its own JDK (22),
+   which Gradle 7.6.4 doesn't support — the import silently fails and
+   no classes resolve.
+
+3. *Compilation target* is set by =sourceCompatibility= / =targetCompatibility=
+   in =build.gradle= (e.g., ='1.6'=). jdtls reads this from Gradle metadata.
+   The =configuration.runtimes= list with =default = true= on =JavaSE-1.8=
+   tells jdtls which JDK to use for type resolution.
+
+**** jenv integration
+=jenv= global is set to =1.8= (matching the project). The =jdtls-java= wrapper
+explicitly bypasses jenv when it returns JDK < 17, falling back to higher JDKs.
+This means =jenv= controls your shell/Gradle JDK while jdtls gets its own.
+
+**** Multi-module Gradle root detection
+For multi-module Gradle projects, =find_root= must find the *parent* root,
+not a child subproject's =build.gradle=. Consider this layout:
+#+begin_example
+my-project/            <- parent (has settings.gradle, gradlew, .git)
+  settings.gradle
+  gradlew
+  build.gradle
+  lib/
+  common/              <- child module
+    build.gradle
+    src/
+  module-a/            <- child module
+    build.gradle
+    src/
+  module-b/            <- child module
+    build.gradle
+    src/
+#+end_example
+
+When you open =module-a/src/Foo.java=, =find_root= walks upward.
+If =build.gradle= is in the marker list, it matches =module-a/build.gradle= first
+and jdtls only imports that single module — cross-module classes won't resolve.
+
+The fix is to split markers into two priority tiers:
+#+begin_src lua
+-- Tier 1: top-level markers (finds my-project/, not module-a/)
+find_root({ "settings.gradle", "settings.gradle.kts", "gradlew", "mvnw", ".git" })
+-- Tier 2: fallback for standalone single-module projects
+find_root({ "build.gradle", "build.gradle.kts", "pom.xml" })
+#+end_src
+Tier 1 skips past child =build.gradle= files and lands on the parent where
+=settings.gradle= lives. jdtls then imports the entire multi-module project
+with all submodule dependencies resolved.
+
+**** Troubleshooting
+- =:LspInfo= — check jdtls is attached and shows the correct root dir.
+- =:LspLog= — look for Gradle import errors or JDK version complaints.
+- Workspace cache at =~/.cache/nvim/jdtls-workspaces/<project>/= — delete to force reimport.
+- If classes don't resolve after import, check =:LspLog= for
+  ="jdtls requires at least Java 21"= (jdtls-java wrapper issue) or
+  Gradle daemon failures (JDK mismatch).
+
 ** orgmode text objects
 | Mode | Key | Action                     |
 |------+-----+----------------------------|
