@@ -163,7 +163,7 @@ This is the nvim-jdtls recommended approach because jdtls needs per-project work
 | n    | <leader>jm | Debug test method     |
 | n    | <leader>jr | Organize imports      |
 
-*** JDK version layering (real-world example: YTAP project)
+*** JDK version layering (real-world scenario: my automation project)
 This config handles projects where production targets JDK 6/8 but jdtls itself requires JDK 21+.
 Three JDK roles must be separated:
 
