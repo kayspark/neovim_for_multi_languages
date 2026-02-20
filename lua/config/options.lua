@@ -3,13 +3,14 @@
 -- Add any additional options here
 -- set deault input method to koreans
 
+vim.g.lazyvim_picker = "snacks"
 vim.g.root_spec = { "lsp", { ".git", "lua", ".project", ".projectile" }, "cwd" }
 vim.g.input_method_default = "korean"
 local opt = vim.opt
 
 opt.foldlevel = 20
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.scriptencoding = "utf-8"
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"

@@ -7,13 +7,6 @@ vim.keymap.set("n", "<leader>bk", "<cmd>bp<cr>", { desc = "Previous" })
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous" })
 
-vim.keymap.set(
-  "n",
-  "<leader>bb",
-  "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
-  { desc = "Telescope buffers" }
-)
-
 -- increment/decrement (match Doom Emacs evil-numbers bindings)
 vim.keymap.set("n", "g=", "<C-a>", { desc = "Increment number" })
 vim.keymap.set("n", "g-", "<C-x>", { desc = "Decrement number" })
@@ -22,10 +15,6 @@ vim.keymap.set("v", "g-", "g<C-x>", { desc = "Decrement numbers sequentially" })
 
 -- clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
-
--- gen
-vim.keymap.set("v", "<leader>]", "<cmd>Gen<CR>")
-vim.keymap.set("n", "<leader>]", "<cmd>Gen<CR>")
 
 vim.keymap.set("v", "<C-s>", "<cmd>sort<CR>") -- Sort highlighted text in visual mode with Control+S
 vim.keymap.set("v", "<leader>rr", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words

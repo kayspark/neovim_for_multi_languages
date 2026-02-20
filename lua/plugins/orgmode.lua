@@ -10,15 +10,14 @@ return {
     event = "BufReadPre",
     config = function()
       require("orgmode").setup({
-        org_todo_keywords = { "TODO(t)", "WAIT(w)", "PROC(p)", "HOLD(h)", "|", "DONE(d)", "CANCEL(c)" },
+        org_todo_keywords = { "PLANNED(p)", "TODO(t)", "PROG(g)", "REVIEW(r)", "|", "DONE(d)", "CANCEL(c)" },
         org_todo_keyword_faces = {
-          --        DELEGATED = ':background #FFFFFF :slant italic :underline on',
-          TODO = ":background #000000 :foreground #E78284", -- overrides builtin color for `TODO` keyword
-          WAIT = ":background #000000 :foreground #E7C664", -- overrides builtin color for `WAIT` keyword
-          PROC = ":background #000000 :foreground #E7C664", -- overrides builtin color for `PROC` keyword
-          HOLD = ":background #000000 :foreground #E7C664", -- overrides builtin color for `HOLD` keyword
-          DONE = ":background #000000 :foreground #86DC2F", -- overrides builtin color for `DONE` keyword
-          CANCEL = ":background #000000 :foreground #E78284", -- overrides builtin color for `CANCEL` keyword
+          PLANNED = ":background #000000 :foreground #6b7280", -- 계획됨 (grey)
+          TODO = ":background #000000 :foreground #2563eb",    -- 할 일 (blue)
+          PROG = ":background #000000 :foreground #d97706",    -- 진행 중 (amber)
+          REVIEW = ":background #000000 :foreground #ea580c",  -- 검토 중 (orange)
+          DONE = ":background #000000 :foreground #16a34a",    -- 완료 (green)
+          CANCEL = ":background #000000 :foreground #94a3b8",  -- 취소 (slate)
         },
         mappings = {
           text_objects = {
@@ -33,8 +32,8 @@ return {
           },
         },
         emacs_config = {
-          excutable_path = "/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs",
-          config_path = "~/.dotfiles/.doom.d/init.el",
+          executable_path = "emacsclient -nw",
+          config_path = "~/.config/doom/config.el",
         },
         org_agenda_files = { "~/org/*.org", "~/org/org-roam/**/*" },
         org_default_notes_file = "~/org/notes.org",
