@@ -12,6 +12,5 @@ return {
     { "gX", ":Gitsigns reset_buffer<CR>", desc = "Reset Buffer" },
     { "gu", ":Gitsigns undo_stage_hunk<CR>", desc = "Undo Stage Hunk" },
     { "gh", ":Gitsigns preview_hunk<CR>", desc = "Preview Hunk" },
-    { "gb", ":Gitsigns stage_buffer<CR>", desc = "Stage Buffer" },
   },
 }
