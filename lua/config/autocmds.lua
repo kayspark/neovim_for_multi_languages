@@ -30,6 +30,13 @@
 --   end,
 -- })
 
+-- Gracefully stop all LSP clients on exit to prevent orphaned processes
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    vim.lsp.stop_client(vim.lsp.get_clients())
+  end,
+})
+
 -- Enable spell checking for prose filetypes
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "text", "gitcommit", "org" },
