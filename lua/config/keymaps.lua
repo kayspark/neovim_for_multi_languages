@@ -1,9 +1,9 @@
 -- overwrite lazyvim mappings with vim-tmux-navigator mappings
 -- see: https://github.com/christoomey/vim-tmux-navigator/blob/master/plugin/tmux_navigator.vim
 
--- buffer (j/k matches vim motion direction)
-vim.keymap.set("n", "<leader>bj", "<cmd>bn<cr>", { desc = "Next" })
-vim.keymap.set("n", "<leader>bk", "<cmd>bp<cr>", { desc = "Previous" })
+-- buffer
+vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous" })
 
 -- increment/decrement (match Doom Emacs evil-numbers bindings)
 vim.keymap.set("n", "g=", "<C-a>", { desc = "Increment number" })
