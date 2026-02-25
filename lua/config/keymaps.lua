@@ -16,6 +16,18 @@ vim.keymap.set("v", "g-", "g<C-x>", { desc = "Decrement numbers sequentially" })
 -- clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 
+-- window zoom toggle (matches tmux C-b z)
+vim.keymap.set("n", "<C-w>z", function()
+  if vim.t.zoom_winid then
+    vim.cmd("wincmd =")
+    vim.t.zoom_winid = nil
+  else
+    vim.t.zoom_winid = vim.api.nvim_get_current_win()
+    vim.cmd("wincmd _")
+    vim.cmd("wincmd |")
+  end
+end, { desc = "Zoom toggle" })
+
 vim.keymap.set("v", "<C-s>", "<cmd>sort<CR>") -- Sort highlighted text in visual mode with Control+S
 vim.keymap.set("v", "<leader>rr", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Move current line down
