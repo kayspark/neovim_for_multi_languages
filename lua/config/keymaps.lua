@@ -1,11 +1,9 @@
 -- overwrite lazyvim mappings with vim-tmux-navigator mappings
 -- see: https://github.com/christoomey/vim-tmux-navigator/blob/master/plugin/tmux_navigator.vim
 
--- buffer
+-- buffer (j/k matches vim motion direction)
 vim.keymap.set("n", "<leader>bj", "<cmd>bn<cr>", { desc = "Next" })
 vim.keymap.set("n", "<leader>bk", "<cmd>bp<cr>", { desc = "Previous" })
-vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next" })
-vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous" })
 
 -- increment/decrement (match Doom Emacs evil-numbers bindings)
 vim.keymap.set("n", "g=", "<C-a>", { desc = "Increment number" })
@@ -13,8 +11,10 @@ vim.keymap.set("n", "g-", "<C-x>", { desc = "Decrement number" })
 vim.keymap.set("v", "g=", "g<C-a>", { desc = "Increment numbers sequentially" })
 vim.keymap.set("v", "g-", "g<C-x>", { desc = "Decrement numbers sequentially" })
 
--- clipboard
+-- clipboard (matches Emacs SPC y pattern)
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>yp", '"+p', { desc = "Paste from clipboard (after)" })
+vim.keymap.set("n", "<leader>yP", '"+P', { desc = "Paste from clipboard (before)" })
 
 -- window zoom toggle (matches tmux C-b z)
 vim.keymap.set("n", "<C-w>z", function()
