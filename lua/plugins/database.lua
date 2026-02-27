@@ -26,6 +26,16 @@ return {
       if u and p and h then
         table.insert(vim.g.dbs, { name = "nc_ees_prod", url = "oracle://" .. u .. ":" .. p .. "@" .. h .. ":1521/NEPESDB1" })
       end
+      -- laweh_ees: eesadm@ns3-ees-db.nepes.co.kr:1521/EESDB
+      local eu, ep = vim.env.LAWEH_EES_DB_USER, vim.env.LAWEH_EES_DB_PASS
+      if eu and ep then
+        table.insert(vim.g.dbs, { name = "laweh_ees", url = "oracle://" .. eu .. ":" .. ep .. "@ns3-ees-db.nepes.co.kr:1521/EESDB" })
+      end
+      -- nc_mes: mighty@mes.nepes.co.kr:1521/CCUBE
+      local mu, mp = vim.env.NC_MES_DB_USER, vim.env.NC_MES_DB_PASS
+      if mu and mp then
+        table.insert(vim.g.dbs, { name = "nc_mes", url = "oracle://" .. mu .. ":" .. mp .. "@mes.nepes.co.kr:1521/CCUBE" })
+      end
     end,
   },
   {
