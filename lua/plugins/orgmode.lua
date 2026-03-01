@@ -21,11 +21,11 @@ return {
         },
         mappings = {
           org = {
-            org_next_visible_heading = "zn",
-            org_previous_visible_heading = "zp",
-            org_forward_heading_same_level = "zf",
-            org_backward_heading_same_level = "zb",
-            outline_up_heading = "zu",
+            org_next_visible_heading = "]h",
+            org_previous_visible_heading = "[h",
+            org_forward_heading_same_level = "]s",
+            org_backward_heading_same_level = "[s",
+            outline_up_heading = "]u",
           },
           text_objects = {
             inner_heading = "ic",
