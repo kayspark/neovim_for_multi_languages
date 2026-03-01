@@ -20,6 +20,13 @@ return {
           CANCEL = ":background #000000 :foreground #94a3b8",  -- 취소 (slate)
         },
         mappings = {
+          org = {
+            org_next_visible_heading = "zn",
+            org_previous_visible_heading = "zp",
+            org_forward_heading_same_level = "zf",
+            org_backward_heading_same_level = "zb",
+            outline_up_heading = "zu",
+          },
           text_objects = {
             inner_heading = "ic",
             around_heading = "ac",
