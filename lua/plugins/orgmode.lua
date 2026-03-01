@@ -9,7 +9,8 @@ return {
     },
     event = "BufReadPre",
     config = function()
-      require("orgmode").setup({
+      local org = require("orgmode")
+      org.setup({
         org_todo_keywords = { "PLANNED(p)", "TODO(t)", "PROG(g)", "REVIEW(r)", "|", "DONE(d)", "CANCEL(c)" },
         org_todo_keyword_faces = {
           PLANNED = ":background #000000 :foreground #6b7280", -- 계획됨 (grey)
@@ -56,6 +57,15 @@ return {
             target = "~/org/notes.org",
           },
         },
+      })
+
+      -- ]] / [[ aliases for heading navigation (matches Emacs and Vim convention)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "org",
+        callback = function()
+          vim.keymap.set("n", "]]", "]h", { buffer = true, remap = true, desc = "Next heading" })
+          vim.keymap.set("n", "[[", "[h", { buffer = true, remap = true, desc = "Prev heading" })
+        end,
       })
     end,
   },
