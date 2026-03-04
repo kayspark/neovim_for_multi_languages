@@ -37,6 +37,21 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 
+-- ]] / [[ heading navigation for markdown (matches org and Emacs convention)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    local function jump_heading(forward)
+      local flags = forward and "W" or "bW"
+      vim.fn.search("^#\\+\\s", flags)
+    end
+    vim.keymap.set("n", "]]", function() jump_heading(true) end, { buffer = true, desc = "Next heading" })
+    vim.keymap.set("n", "[[", function() jump_heading(false) end, { buffer = true, desc = "Prev heading" })
+    vim.keymap.set("n", "]h", function() jump_heading(true) end, { buffer = true, desc = "Next heading" })
+    vim.keymap.set("n", "[h", function() jump_heading(false) end, { buffer = true, desc = "Prev heading" })
+  end,
+})
+
 -- Enable spell checking for prose filetypes
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "text", "gitcommit", "org" },
