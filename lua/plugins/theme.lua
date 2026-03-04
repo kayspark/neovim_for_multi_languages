@@ -6,7 +6,7 @@ return {
     end,
   },
   {
-    dir = "~/workspace/colorscheme/nvim-nepes",
+    "kayspark/nvim-nepes",
     name = "nepes",
     lazy = false,
     priority = 1000,
