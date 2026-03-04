@@ -1,148 +1,166 @@
-* A neovim configuration for multiple languages
+* Neovim Configuration — LazyVim
 
-This configuration is referring  LazyVim and referred dotfiles from Josh medesky, from time to time.
+Custom Neovim configuration built on [[https://github.com/LazyVim/LazyVim][LazyVim]] with a focus on multi-language development.
+Part of the [[https://github.com/kayspark/.dotfiles][dotfiles]] repo as a git submodule.
 
-For those who is using multiple languages, neovim can be a good choice.
-  This repository is for my workflow like below :
-  - SQL with oracle database : vim-dadbod for query execution and completion
-  - Java and C++ legacy projects
-  - zsh/fish/xml/html for rutine works
-  - Exciting experiment projects with Rust, Json and typescripts.
+| Neovim | 0.11+ (LazyVim framework)                           |
+| Theme  | [[https://github.com/kayspark/nvim-nepes][nepes]] (dark/light, transparent)                     |
+| Nav    | smart-splits.nvim (cross WezTerm/tmux panes)        |
+| Git    | Neogit + Diffview (LazyGit intentionally disabled)   |
+| Picker | snacks.picker (Telescope disabled)                   |
 
-Installation instruction is same as LazyVim. Start with starter kit and add your preferred plugins by copying. lua/plugins/lsp directory can be ignored but I copied it due to reference and test purposes. Codes are not cleaned up yet but it will be keep updated weekly basis.
+** Key Choices
 
-* multiple languages?
-Key binding matters for non english users like me. for example,Ctrl+space for me means changing input languages. Howver many plugins are using it with other purposes.
-In language servers, key binding for code actions also mattered but seems not cared carefully yet. So, I started to make this repository to share my experiments, someday can be a common practice hopefully.
+- *Neogit-first Git workflow* — stage/commit/push from Neogit, diff review via Diffview.
+- *smart-splits.nvim* — seamless navigation across editor splits and WezTerm/tmux panes.
+- *Nepes corporate theme* — matching colorscheme across Emacs, tmux, WezTerm, starship.
+- *Language extras* — Rust, TypeScript, YAML are available but commented out in =lua/config/lazy.lua=. Uncomment + =:Lazy sync= to enable.
 
+* Installation
 
+#+begin_src bash
+git clone https://github.com/kayspark/neovim_for_multi_languages ~/.config/nvim
+nvim  # LazyVim installs plugins on first run
+#+end_src
 
-* work in process
-- rust and json for backend development with neovim
-- vim-dadbod for database
+* Key Maps
 
-* Recent Changes
-** 2026-02-17
- - Git UI policy tightened to Neogit-first workflow.
- - Disabled default LazyGit key bindings from LazyVim Snacks (`<leader>gg`, `<leader>gG`) to avoid confusion.
- - Removed `ai.claudecode` extra (CLI workflow is primary).
- - Commented out language extras for easy later enable:
-   - `lazyvim.plugins.extras.lang.rust`
-   - `lazyvim.plugins.extras.lang.typescript`
-   - `lazyvim.plugins.extras.lang.yaml`
- - Re-enable by uncommenting entries in `lua/config/lazy.lua`, then run `:Lazy sync`.
+All custom key maps defined in this repository. Default LazyVim key maps are not listed.
 
-** 2026-02-06
- - Removed `sqls` integration from `lua/plugins/lsp.lua` and `neoconf.json`.
- - SQL workflow now uses `vim-dadbod` and `vim-dadbod-completion` only.
- - Added a Git signing runbook for contributors and agents: `docs/ops/git-signing.md`.
+** General
 
-** 2026-02-02
- - **Configuration Health Check & Cleanup**:
-   - Reviewed and updated the configuration to align with the latest LazyVim standards.
-   - Cleaned up `lua/plugins/database.lua` to remove redundant settings.
- - **LazyVim Extras Update**:
-   - The configuration now uses `aerial` instead of the deprecated `navic` for the symbols outline. It's recommended to remove the `navic` extra via the `:LazyExtras` command to avoid conflicts.
+| Mode | Key          | Action                              |
+|------+--------------+-------------------------------------|
+| n    | =<leader>bn= | Next buffer                         |
+| n    | =<leader>bp= | Previous buffer                     |
+| v    | =<leader>y=  | Yank selection to system clipboard  |
+| n    | =<leader>yp= | Paste from clipboard (after)        |
+| n    | =<leader>yP= | Paste from clipboard (before)       |
+| n    | =g==          | Increment number                    |
+| n    | =g-=          | Decrement number                    |
+| v    | =g==          | Increment numbers sequentially      |
+| v    | =g-=          | Decrement numbers sequentially      |
+| n    | =<C-w>z=     | Zoom toggle (like tmux =C-b z=)     |
+| v    | =<C-s>=      | Sort selected lines                 |
+| v    | =<leader>rr= | Replace selected text in whole file |
+| v    | =J=          | Move selected line(s) down          |
+| v    | =K=          | Move selected line(s) up            |
 
-* key maps
-This list includes all custom key maps defined in this repository. Default LazyVim key maps are not listed.
+** Smart Splits Navigation
 
-** general
-| Mode | Key        | Action                              |
-|------+------------+-------------------------------------|
-| n    | <leader>bj | Next buffer                         |
-| n    | <leader>bk | Previous buffer                     |
-| n    | <leader>bn | Next buffer                         |
-| n    | <leader>bp | Previous buffer                     |
-| n    | <leader>bb | Telescope buffers (MRU/last used)   |
-| v    | <leader>y  | Yank selection to system clipboard  |
-| n    | <leader>]  | Run :Gen                            |
-| v    | <leader>]  | Run :Gen on selection               |
-| v    | <C-s>      | Sort selected lines                 |
-| v    | <leader>rr | Replace selected text in whole file |
-| v    | J          | Move selected line(s) down          |
-| v    | K          | Move selected line(s) up            |
+Uses [[https://github.com/mrjones2014/smart-splits.nvim][smart-splits.nvim]] — moves across Neovim splits and WezTerm/tmux panes seamlessly.
 
-** git
-Neogit is the primary Git UI in this config. LazyGit integration is intentionally disabled.
+| Mode | Key     | Action                   |
+|------+---------+--------------------------|
+| n    | =<C-h>= | Move to left split/pane  |
+| n    | =<C-j>= | Move to below split/pane |
+| n    | =<C-k>= | Move to above split/pane |
+| n    | =<C-l>= | Move to right split/pane |
+| n    | =<A-h>= | Resize left              |
+| n    | =<A-j>= | Resize down              |
+| n    | =<A-k>= | Resize up                |
+| n    | =<A-l>= | Resize right             |
 
-| Mode | Key        | Action                 |
-|------+------------+------------------------|
-| n    | <leader>gg | Neogit status          |
-| n    | <leader>gc | Neogit commit          |
-| n    | <leader>gd | Diffview open          |
-| n    | <leader>gD | Diffview close         |
-| n    | ]g         | Next git hunk          |
-| n    | [g         | Previous git hunk      |
-| n    | gs         | Stage hunk             |
-| n    | gS         | Stage buffer           |
-| n    | gx         | Reset hunk             |
-| n    | gX         | Reset buffer           |
-| n    | gu         | Undo stage hunk        |
-| n    | gh         | Preview hunk           |
-| n    | gb         | Stage buffer           |
+** Git
 
-*** Git workflow (Neogit + Diffview)
-This is the recommended day-to-day flow in this config.
+Neogit is the primary Git UI. LazyGit integration is intentionally disabled.
+
+| Mode | Key          | Action            |
+|------+--------------+-------------------|
+| n    | =<leader>gg= | Neogit status     |
+| n    | =<leader>gc= | Neogit commit     |
+| n    | =<leader>gd= | Diffview open     |
+| n    | =<leader>gD= | Diffview close    |
+| n    | =]g=         | Next git hunk     |
+| n    | =[g=         | Previous git hunk |
+| n    | =gs=         | Stage hunk        |
+| n    | =gS=         | Stage buffer      |
+| n    | =gx=         | Reset hunk        |
+| n    | =gX=         | Reset buffer      |
+| n    | =gu=         | Undo stage hunk   |
+| n    | =gh=         | Preview hunk      |
+
+*** Git Workflow (Neogit + Diffview)
+
+Recommended day-to-day flow:
 
 **** 1) Add / stage changes
-- Open Neogit status: ~<leader>gg~
+- Open Neogit status: =<leader>gg=
 - Stage from Neogit status buffer (Magit-style) for file/hunk selection.
 - Or stage directly from code with gitsigns:
-  - ~gs~ stage hunk
-  - ~gS~ stage buffer
-  - ~gh~ preview hunk before staging
+  - =gs= stage hunk
+  - =gS= stage buffer
+  - =gh= preview hunk before staging
 
 **** 2) Commit
-- Open commit flow: ~<leader>gc~
+- Open commit flow: =<leader>gc=
 - Write commit message in the commit buffer.
 - Save and confirm commit from Neogit.
-- If commit signing is required, follow ~docs/ops/git-signing.md~.
+- If commit signing is required, follow =docs/ops/git-signing.md=.
 
 **** 3) Fetch / pull / rebase
-- Open Neogit: ~<leader>gg~
+- Open Neogit: =<leader>gg=
 - Use Neogit popups to run fetch/pull/rebase operations.
-- Tip: use ~?~ inside Neogit to see current buffer actions.
+- Tip: use =?= inside Neogit to see current buffer actions.
 
 **** 4) Review diff before merge
-- Open repository diff view: ~<leader>gd~ (DiffviewOpen)
-- Close diff view: ~<leader>gD~ (DiffviewClose)
-- Useful commands in command line:
-  - ~:DiffviewFileHistory~ for file/repo history diff
-  - ~:DiffviewToggleFiles~ to show/hide file panel
-  - ~:DiffviewRefresh~ after branch updates
+- Open repository diff view: =<leader>gd= (DiffviewOpen)
+- Close diff view: =<leader>gD= (DiffviewClose)
+- Useful commands:
+  - =:DiffviewFileHistory= for file/repo history diff
+  - =:DiffviewToggleFiles= to show/hide file panel
+  - =:DiffviewRefresh= after branch updates
 
 **** 5) Merge with diff
 - Fetch and checkout target branch in Neogit.
-- Open ~<leader>gd~ and review changed files before merge.
+- Open =<leader>gd= and review changed files before merge.
 - Run merge from Neogit popup.
 - If conflicts occur:
   - Use Diffview to inspect both sides and conflict locations.
   - Resolve in buffers, stage resolved files, then complete merge commit.
 
 **** 6) Push
-- Open Neogit: ~<leader>gg~
+- Open Neogit: =<leader>gg=
 - Use push popup/action to push current branch.
 - Prefer pushing only after diff review and clean status.
 
 **** Quick habits
-- Before commit: ~gh~ on important hunks + ~<leader>gd~ full diff pass.
+- Before commit: =gh= on important hunks + =<leader>gd= full diff pass.
 - Before push: confirm no unstaged/untracked surprises in Neogit status.
-- For history investigation: ~:DiffviewFileHistory %~ on current file.
+- For history investigation: =:DiffviewFileHistory %= on current file.
 
-** tmux navigator
-| Mode | Key    | Action                      |
-|------+--------+-----------------------------|
-| n    | <C-h>  | TmuxNavigateLeft            |
-| n    | <C-j>  | TmuxNavigateDown            |
-| n    | <C-k>  | TmuxNavigateUp              |
-| n    | <C-l>  | TmuxNavigateRight           |
-| n    | <C-\>  | TmuxNavigatePrevious        |
+** Bracket Navigation (~]~ / ~[~)
 
-** spell checking
+Unified heading navigation across org and markdown. Matches Emacs convention.
+
+| Mode | Key  | Scope  | Action                |
+|------+------+--------+-----------------------|
+| n    | =]]= | org/md | Next heading          |
+| n    | =[[= | org/md | Prev heading          |
+| n    | =]h= | org/md | Next heading (alias)  |
+| n    | =[h= | org/md | Prev heading (alias)  |
+| n    | =]s= | org    | Next same-level       |
+| n    | =[s= | org    | Prev same-level       |
+| n    | =]u= | org    | Parent heading        |
+
+** Orgmode Text Objects
+
+| Mode | Key | Action                   |
+|------+-----+--------------------------|
+| o/x  | ic  | Inner heading            |
+| o/x  | ac  | Around heading           |
+| o/x  | is  | Inner subtree            |
+| o/x  | as  | Around subtree           |
+| o/x  | iC  | Inner heading from root  |
+| o/x  | aC  | Around heading from root |
+| o/x  | iS  | Inner subtree from root  |
+| o/x  | aS  | Around subtree from root |
+
+** Spell Checking
+
 Spell checking is disabled globally and enabled for prose filetypes (markdown, text, gitcommit, org).
-Korean (Hangul) and other CJK characters are skipped via ~spelllang = { "en", "cjk" }~.
-Personal dictionary is stored in ~spell/en.utf-8.add~.
+Korean (Hangul) and other CJK characters are skipped via =spelllang = { "en", "cjk" }=.
+Personal dictionary is stored in =spell/en.utf-8.add=.
 
 | Mode | Key | Action                          |
 |------+-----+---------------------------------|
@@ -154,24 +172,26 @@ Personal dictionary is stored in ~spell/en.utf-8.add~.
 | n    | z=  | Show spelling suggestions       |
 
 ** Java (jdtls)
+
 jdtls (Eclipse JDT Language Server) is configured via =ftplugin/java.lua=, not through the standard mason-lspconfig auto-attach.
 This is the nvim-jdtls recommended approach because jdtls needs per-project workspace isolation and =start_or_attach()= semantics.
 
-| Mode | Key        | Action                |
-|------+------------+-----------------------|
-| n    | <leader>jd | Debug test class      |
-| n    | <leader>jm | Debug test method     |
-| n    | <leader>jr | Organize imports      |
+| Mode | Key          | Action           |
+|------+--------------+------------------|
+| n    | =<leader>jd= | Debug test class  |
+| n    | =<leader>jm= | Debug test method |
+| n    | =<leader>jr= | Organize imports  |
 
-*** JDK version layering (real-world scenario: my automation project)
+*** JDK version layering
+
 This config handles projects where production targets JDK 6/8 but jdtls itself requires JDK 21+.
 Three JDK roles must be separated:
 
-| Role                  | JDK   | Why                                                  |
-|-----------------------+-------+------------------------------------------------------|
-| jdtls runtime         | 22    | jdtls 1.40+ requires JDK 21 minimum                 |
-| Gradle daemon         | 8     | Gradle 7.6.x supports up to JDK 19; project needs 8 |
-| Project compile target | 6/8  | Production equipment PCs run JDK 6/8                 |
+| Role                  | JDK  | Why                                                  |
+|-----------------------+------+------------------------------------------------------|
+| jdtls runtime         | 22   | jdtls 1.40+ requires JDK 21 minimum                 |
+| Gradle daemon         | 8    | Gradle 7.6.x supports up to JDK 19; project needs 8 |
+| Project compile target | 6/8 | Production equipment PCs run JDK 6/8                 |
 
 **** How it works
 1. *jdtls process* runs on JDK 22 via =~/.config/bin/jdtls-java= wrapper.
@@ -236,21 +256,9 @@ with all submodule dependencies resolved.
   ="jdtls requires at least Java 21"= (jdtls-java wrapper issue) or
   Gradle daemon failures (JDK mismatch).
 
-** orgmode text objects
-| Mode | Key | Action                     |
-|------+-----+----------------------------|
-| o/x  | ic  | Inner heading              |
-| o/x  | ac  | Around heading             |
-| o/x  | is  | Inner subtree              |
-| o/x  | as  | Around subtree             |
-| o/x  | iC  | Inner heading from root    |
-| o/x  | aC  | Around heading from root   |
-| o/x  | iS  | Inner subtree from root    |
-| o/x  | aS  | Around subtree from root   |
+* References
 
-* references
-
-- Tim Pope's vim-dadbod
-- Git signing runbook: `docs/ops/git-signing.md`
- - [[https://github.com/joshmedeski/dotfiles.git][Josh medesky's dot files]]
- - LazyVim starter Kit
+- [[https://github.com/LazyVim/LazyVim][LazyVim starter kit]]
+- [[https://github.com/kayspark/nvim-nepes][Nepes colorscheme]]
+- Git signing runbook: =docs/ops/git-signing.md=
+- [[https://github.com/joshmedeski/dotfiles.git][Josh Medeski's dotfiles]]
