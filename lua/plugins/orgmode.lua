@@ -41,9 +41,9 @@ return {
         },
         emacs_config = {
           executable_path = "emacsclient -nw",
-          config_path = "~/.config/doom/config.el",
+          config_path = "~/.config/emacs/post-init.el",
         },
-        org_agenda_files = { "~/org/*.org", "~/org/org-roam/**/*" },
+        org_agenda_files = { "~/org/*.org", "~/org/notes/**/*" },
         org_default_notes_file = "~/org/notes.org",
         org_capture_templates = {
           T = {

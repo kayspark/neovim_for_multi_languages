@@ -48,16 +48,26 @@ local config = {
       import = {
         gradle = {
           java = {
-            home = "/Library/Java/JavaVirtualMachines/openjdk8-temurin/Contents/Home",
+            home = vim.env.JAVA_HOME,
           },
         },
       },
       configuration = {
-        runtimes = {
-          { name = "JavaSE-1.8", path = "/Library/Java/JavaVirtualMachines/openjdk8-temurin/Contents/Home", default = true },
-          { name = "JavaSE-11", path = "/Library/Java/JavaVirtualMachines/openjdk11-temurin/Contents/Home" },
-          { name = "JavaSE-21", path = "/opt/local/Library/Java/JavaVirtualMachines/jdk-21-eclipse-temurin.jdk/Contents/Home" },
-        },
+        runtimes = (function()
+          if vim.fn.has("mac") == 1 then
+            return {
+              { name = "JavaSE-1.8", path = "/Library/Java/JavaVirtualMachines/openjdk8-temurin/Contents/Home", default = true },
+              { name = "JavaSE-11", path = "/Library/Java/JavaVirtualMachines/openjdk11-temurin/Contents/Home" },
+              { name = "JavaSE-21", path = "/opt/local/Library/Java/JavaVirtualMachines/jdk-21-eclipse-temurin.jdk/Contents/Home" },
+            }
+          else
+            return {
+              { name = "JavaSE-1.8", path = "/usr/lib/jvm/java-8-openjdk-amd64", default = true },
+              { name = "JavaSE-11", path = "/usr/lib/jvm/java-11-openjdk-amd64" },
+              { name = "JavaSE-21", path = "/usr/lib/jvm/java-21-openjdk-amd64" },
+            }
+          end
+        end)(),
       },
     },
   },

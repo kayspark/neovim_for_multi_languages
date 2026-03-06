@@ -1,11 +1,12 @@
+vim.filetype.add({
+  filename = {
+    ["envrc"] = "bash",
+  },
+})
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    vim.filetype.add({
-      filename = {
-        ["envrc"] = "bash",
-      },
-    }),
     opts = {
       ensure_installed = {
         "bash",

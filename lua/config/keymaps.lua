@@ -1,6 +1,3 @@
--- overwrite lazyvim mappings with vim-tmux-navigator mappings
--- see: https://github.com/christoomey/vim-tmux-navigator/blob/master/plugin/tmux_navigator.vim
-
 -- buffer
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous" })
