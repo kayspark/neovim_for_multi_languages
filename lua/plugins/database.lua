@@ -4,10 +4,8 @@ return {
     dependencies = {
       {
         "tpope/vim-dadbod",
-        init = function()
-          -- Use sqlcl-legacy wrapper (handles Java 11+ selection) for Oracle 11.2
-          vim.g.dbext_default_ORA_bin = vim.fn.expand("~/.config/bin/sqlcl-legacy")
-        end,
+        -- Default: sqlplus (fast). Set to sqlcl-legacy for advanced features:
+        -- vim.g.dbext_default_ORA_bin = vim.fn.expand("~/.config/bin/sqlcl-legacy")
       },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
     },
