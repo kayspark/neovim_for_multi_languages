@@ -2,6 +2,10 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
+      delay = 0,
+      icons = {
+        mappings = true,
+      },
       plugins = {
         marks = true, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
