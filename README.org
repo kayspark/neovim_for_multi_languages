@@ -3,6 +3,18 @@
 Custom Neovim configuration built on [[https://github.com/LazyVim/LazyVim][LazyVim]] with a focus on multi-language development.
 Part of the [[https://github.com/kayspark/.dotfiles][dotfiles]] repo as a git submodule.
 
+** Screenshots
+
+| Dark | Light |
+|------+-------|
+| [[file:docs/dark.png]] | [[file:docs/light.png]] |
+
+*** Demo
+
+| Dark | Light |
+|------+-------|
+| [[file:docs/dark.gif]] | [[file:docs/light.gif]] |
+
 | Neovim | 0.11+ (LazyVim framework)                           |
 | Theme  | [[https://github.com/kayspark/nvim-nepes][nepes]] (dark/light, transparent)                     |
 | Nav    | smart-splits.nvim (cross WezTerm/tmux panes)        |
