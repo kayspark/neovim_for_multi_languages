@@ -7,7 +7,18 @@ return {
         -- Default: sqlplus (fast). Set to sqlcl-legacy for advanced features:
         -- vim.g.dbext_default_ORA_bin = vim.fn.expand("~/.config/bin/sqlcl-legacy")
       },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
+      {
+        "kristijanhusak/vim-dadbod-completion",
+        ft = { "sql", "mysql", "plsql" },
+        config = function()
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "sql", "mysql", "plsql" },
+            callback = function()
+              vim.bo.omnifunc = "vim_dadbod_completion#omni"
+            end,
+          })
+        end,
+      },
     },
     cmd = {
       "DBUI",
@@ -17,7 +28,7 @@ return {
     },
     init = function()
       vim.g.db_ui_use_nerd_fonts = 1
-      vim.g.dbui_save_location = "~/workspace/sql/dadbod_queries"
+      vim.g.db_ui_save_location = "~/workspace/sql/dadbod_queries"
       vim.g.dbs = {}
       -- nc_ees_prod: EESUSER@ees.nepes.co.kr:1521/NEPESDB1
       local u, p, h = vim.env.NC_EES_PROD_USER, vim.env.NC_EES_PROD_PASS, vim.env.NC_EES_PROD_HOST

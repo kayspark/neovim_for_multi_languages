@@ -31,7 +31,7 @@ opt.shiftwidth = 2
 opt.tabstop = 2
 opt.shiftround = true
 opt.smartindent = true
-opt.formatoptions:append({ "r" })
+opt.formatoptions:append("r")
 opt.virtualedit = "block"
 
 -- Search

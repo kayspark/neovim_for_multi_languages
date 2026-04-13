@@ -4,15 +4,17 @@ Shared guidance for AI coding agents working in this repository (Codex and Claud
 
 ## Current State
 
-- Plugin source of truth: `lua/config/lazy.lua`
-- `lazyvim.json` intentionally has `extras: []`
+- Plugin loader: lazy.nvim (no framework — LazyVim was removed 2026-04-13)
+- LSP: native `vim.lsp.config/enable` (Neovim 0.12), nvim-lspconfig for server defaults only
+- Completion: native `vim.lsp.completion.enable` with autotrigger
 - SQL workflow is `vim-dadbod` + `vim-dadbod-ui` + `vim-dadbod-completion` (no `sqls`)
 - DAP/test extras were intentionally removed to minimize plugin dependencies
 
 ## Key Files
 
 - `init.lua`: bootstraps `config.lazy`
-- `lua/config/lazy.lua`: LazyVim setup and enabled extras
+- `lua/config/lazy.lua`: lazy.nvim bootstrap and plugin spec loader
+- `lua/config/lsp.lua`: native LSP server configs and LspAttach autocmd
 - `lua/plugins/*.lua`: plugin specs and overrides
 - `README.org`: user-facing docs and custom keymaps
 - `docs/ops/git-signing.md`: Git commit signing runbook

@@ -15,9 +15,7 @@ vim.lsp.config("lua_ls", {
 vim.lsp.config("jsonls", {
   settings = {
     json = {
-      schemas = function()
-        return require("schemastore").json.schemas()
-      end,
+      schemas = require("schemastore").json.schemas(),
       validate = { enable = true },
     },
   },
@@ -27,9 +25,7 @@ vim.lsp.config("yamlls", {
   settings = {
     yaml = {
       schemaStore = { enable = false, url = "" },
-      schemas = function()
-        return require("schemastore").yaml.schemas()
-      end,
+      schemas = require("schemastore").yaml.schemas(),
     },
   },
 })
@@ -40,7 +36,7 @@ vim.lsp.enable({
   "jsonls", "yamlls",
   "clangd", "gopls", "r_language_server", "rust_analyzer",
   "dockerls", "docker_compose_language_service",
-  "ansiblels", "marksman", "sqls", "texlab",
+  "ansiblels", "marksman", "texlab",
   "tailwindcss", "eslint", "taplo",
 })
 

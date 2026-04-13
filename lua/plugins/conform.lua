@@ -1,6 +1,7 @@
 return {
   "stevearc/conform.nvim",
-  optional = true,
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
       ["fish"] = { "fish_indent" },
@@ -30,7 +31,7 @@ return {
     -- Customize formatters
     formatters = {
       sqlfluff = {
-        args = { "fix", "--dialect", "oracle" },
+        prepend_args = { "--dialect", "oracle" },
       },
       shfmt = {
         prepend_args = { "-i", "2" },
