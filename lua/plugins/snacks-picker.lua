@@ -2,6 +2,7 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      dashboard = { enabled = false },
       picker = { enabled = true },
       explorer = { enabled = true },
     },

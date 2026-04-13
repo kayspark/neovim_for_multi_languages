@@ -26,3 +26,4 @@ opt.splitright = true
 opt.splitkeep = "cursor"
 opt.formatoptions:append({ "r" })
 vim.o.showcmdloc = "statusline"
+opt.completeopt = "menu,menuone,noselect,popup"
