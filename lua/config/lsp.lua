@@ -1,7 +1,8 @@
 -- Native Neovim 0.12 LSP configuration
--- No nvim-lspconfig or mason-lspconfig needed
+-- nvim-lspconfig provides cmd/filetypes/root_markers defaults.
+-- This file adds server-specific settings and enables all servers.
 
--- Server-specific settings
+-- Server-specific settings (override defaults from nvim-lspconfig)
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -11,24 +12,6 @@ vim.lsp.config("lua_ls", {
   },
 })
 
-vim.lsp.config("vtsls", {})
-vim.lsp.config("pyright", {})
-vim.lsp.config("bashls", {})
-vim.lsp.config("clangd", {})
-vim.lsp.config("gopls", {})
-vim.lsp.config("r_language_server", {})
-vim.lsp.config("rust_analyzer", {})
-vim.lsp.config("dockerls", {})
-vim.lsp.config("docker_compose_language_service", {})
-vim.lsp.config("ansiblels", {})
-vim.lsp.config("marksman", {})
-vim.lsp.config("sqls", {})
-vim.lsp.config("texlab", {})
-vim.lsp.config("tailwindcss", {})
-vim.lsp.config("eslint", {})
-vim.lsp.config("taplo", {})
-
--- JSON/YAML with SchemaStore (lazy-require to avoid load-time errors)
 vim.lsp.config("jsonls", {
   settings = {
     json = {

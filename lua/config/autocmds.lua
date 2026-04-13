@@ -81,7 +81,9 @@ autocmd("BufWritePre", {
 autocmd("VimLeave", {
   group = augroup("lsp_cleanup", { clear = true }),
   callback = function()
-    vim.lsp.stop_client(vim.lsp.get_clients())
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      client:stop()
+    end
   end,
 })
 
