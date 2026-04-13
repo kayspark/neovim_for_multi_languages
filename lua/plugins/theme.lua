@@ -1,11 +1,5 @@
 return {
   {
-    "LazyVim/LazyVim",
-    opts = function(_, opts)
-      opts.colorscheme = "nepes"
-    end,
-  },
-  {
     "kayspark/nvim-nepes",
     name = "nepes",
     lazy = false,
@@ -14,5 +8,9 @@ return {
       transparent = true,
       theme = "dark",
     },
+    config = function(_, opts)
+      require("nepes").setup(opts)
+      vim.cmd.colorscheme("nepes")
+    end,
   },
 }

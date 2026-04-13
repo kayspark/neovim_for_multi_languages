@@ -7,6 +7,11 @@ vim.filetype.add({
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    event = "BufReadPre",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     opts = {
       ensure_installed = {
         "bash",
@@ -36,6 +41,22 @@ return {
         "vimdoc",
         "yaml",
       },
+      highlight = { enable = true },
+      indent = { enable = true },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+        },
+      },
     },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    opts = {},
   },
 }

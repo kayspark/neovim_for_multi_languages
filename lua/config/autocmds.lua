@@ -1,44 +1,95 @@
--- -- Turn off paste mode when leaving insert
--- vim.api.nvim_create_autocmd("InsertLeave", {
---   pattern = "*",
---   command = "set nopaste",
--- })
---
--- -- Disable the concealing in some file formats
--- -- The default conceallevel is 3 in LazyVim
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = { "json", "jsonc" },
---   callback = function()
---     vim.opt.conceallevel = 0
---   end,
--- })
---
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   pattern = { "*tmux.conf" },
---   command = "execute 'silent !tmux source <afile> --silent'",
--- })
---
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   pattern = { "config.fish" },
---   command = "execute 'silent !source <afile> --silent'",
--- })
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
--- vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
---   pattern = { "bubu" },
---   callback = function()
---     vim.cmd([[set filetype=javascript]])
---   end,
--- })
-
--- Gracefully stop all LSP clients on exit to prevent orphaned processes
-vim.api.nvim_create_autocmd("VimLeave", {
+-- Reload file when changed externally
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime", { clear = true }),
   callback = function()
-    vim.lsp.stop_client(vim.lsp.get_clients())
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
   end,
 })
 
--- ]] / [[ heading navigation for markdown (matches org and Emacs convention)
-vim.api.nvim_create_autocmd("FileType", {
+-- Highlight yanked text
+autocmd("TextYankPost", {
+  group = augroup("highlight_yank", { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+-- Resize splits when terminal is resized
+autocmd("VimResized", {
+  group = augroup("resize_splits", { clear = true }),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+
+-- Restore cursor position when reopening a file
+autocmd("BufReadPost", {
+  group = augroup("last_loc", { clear = true }),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].last_loc then
+      return
+    end
+    vim.b[buf].last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+-- Close certain filetypes with q
+autocmd("FileType", {
+  group = augroup("close_with_q", { clear = true }),
+  pattern = {
+    "help",
+    "lspinfo",
+    "notify",
+    "qf",
+    "checkhealth",
+    "man",
+    "gitsigns.blame",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- Auto-create parent directories when saving a file
+autocmd("BufWritePre", {
+  group = augroup("auto_create_dir", { clear = true }),
+  callback = function(event)
+    if event.match:match("^%w%w+:[\\/][\\/]") then
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+-- Gracefully stop all LSP clients on exit
+autocmd("VimLeave", {
+  group = augroup("lsp_cleanup", { clear = true }),
+  callback = function()
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      client:stop()
+    end
+  end,
+})
+
+-- ]] / [[ heading navigation for markdown
+autocmd("FileType", {
+  group = augroup("markdown_headings", { clear = true }),
   pattern = "markdown",
   callback = function()
     local function jump_heading(forward)
@@ -53,7 +104,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Enable spell checking for prose filetypes
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
+  group = augroup("spell_prose", { clear = true }),
   pattern = { "markdown", "text", "gitcommit", "org" },
   callback = function()
     vim.opt_local.spell = true
