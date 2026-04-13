@@ -1,6 +1,6 @@
-* Neovim Configuration — LazyVim
+* Neovim Configuration
 
-Custom Neovim configuration built on [[https://github.com/LazyVim/LazyVim][LazyVim]] with a focus on multi-language development.
+Lightweight Neovim 0.12 configuration using [[https://github.com/folke/lazy.nvim][lazy.nvim]] as a plugin loader with native LSP and completion.
 Part of the [[https://github.com/kayspark/.dotfiles][dotfiles]] repo as a git submodule.
 
 ** Screenshots
@@ -15,29 +15,62 @@ Part of the [[https://github.com/kayspark/.dotfiles][dotfiles]] repo as a git su
 |------+-------|
 | [[file:docs/dark.gif]] | [[file:docs/light.gif]] |
 
-| Neovim | 0.11+ (LazyVim framework)                           |
-| Theme  | [[https://github.com/kayspark/nvim-nepes][nepes]] (dark/light, transparent)                     |
-| Nav    | smart-splits.nvim (cross WezTerm/tmux panes)        |
-| Git    | Neogit + Diffview (LazyGit intentionally disabled)   |
-| Picker | snacks.picker (Telescope disabled)                   |
+| Neovim     | 0.12+ (no framework — lazy.nvim loader only)          |
+| LSP        | Native =vim.lsp.config/enable= + nvim-lspconfig defaults |
+| Completion | Native =vim.lsp.completion.enable= (no blink.cmp)      |
+| Theme      | [[https://github.com/kayspark/nvim-nepes][nepes]] (dark/light, transparent)                       |
+| Nav        | smart-splits.nvim (cross Ghostty/tmux panes)           |
+| Git        | Neogit + Diffview                                      |
+| Picker     | snacks.nvim (picker, explorer, indent, notifier)       |
 
 ** Key Choices
 
+- *No framework* — previously used LazyVim; replaced with 30 hand-picked plugins + Neovim 0.12 built-ins.
+- *Native LSP* — =vim.lsp.config()= / =vim.lsp.enable()= with nvim-lspconfig providing server defaults. 19 servers configured.
+- *Native completion* — =vim.lsp.completion.enable()= with autotrigger. No blink.cmp/nvim-cmp.
 - *Neogit-first Git workflow* — stage/commit/push from Neogit, diff review via Diffview.
-- *smart-splits.nvim* — seamless navigation across editor splits and WezTerm/tmux panes.
-- *Nepes corporate theme* — matching colorscheme across Emacs, tmux, WezTerm, starship.
-- *Language extras* — Rust, TypeScript, YAML are available but commented out in =lua/config/lazy.lua=. Uncomment + =:Lazy sync= to enable.
+- *smart-splits.nvim* — seamless navigation across editor splits and Ghostty/tmux panes.
+- *Nepes corporate theme* — matching colorscheme across Emacs, tmux, Ghostty, starship.
+
+** Plugin Count
+
+30 plugins total (including dependencies). See =lua/plugins/= for all specs.
 
 * Installation
 
 #+begin_src bash
 git clone https://github.com/kayspark/neovim_for_multi_languages ~/.config/nvim
-nvim  # LazyVim installs plugins on first run
+nvim  # lazy.nvim installs plugins on first run
 #+end_src
 
 * Key Maps
 
-All custom key maps defined in this repository. Default LazyVim key maps are not listed.
+** Finder (snacks.nvim)
+
+| Mode | Key          | Action         |
+|------+--------------+----------------|
+| n    | =<leader>ff= | Find files     |
+| n    | =<leader>fg= | Grep           |
+| n    | =<leader>fb= | Buffers        |
+| n    | =<leader>fh= | Help           |
+| n    | =<leader>fr= | Recent files   |
+| n    | =<leader>e=  | File explorer  |
+
+** Diagnostics (Trouble)
+
+| Mode | Key          | Action                    |
+|------+--------------+---------------------------|
+| n    | =<leader>xx= | Diagnostics (Trouble)     |
+| n    | =<leader>xX= | Buffer diagnostics        |
+| n    | =<leader>xq= | Quickfix list (Trouble)   |
+| n    | =<leader>xl= | Location list (Trouble)   |
+| n    | =<leader>xt= | TODOs (Trouble)           |
+
+** Search & Replace
+
+| Mode | Key          | Action           |
+|------+--------------+------------------|
+| n    | =<leader>sr= | GrugFar (search and replace) |
 
 ** General
 
@@ -75,7 +108,7 @@ Uses [[https://github.com/mrjones2014/smart-splits.nvim][smart-splits.nvim]] —
 
 ** Git
 
-Neogit is the primary Git UI. LazyGit integration is intentionally disabled.
+Neogit is the primary Git UI.
 
 | Mode | Key          | Action            |
 |------+--------------+-------------------|
@@ -185,7 +218,7 @@ Personal dictionary is stored in =spell/en.utf-8.add=.
 
 ** Java (jdtls)
 
-jdtls (Eclipse JDT Language Server) is configured via =ftplugin/java.lua=, not through the standard mason-lspconfig auto-attach.
+jdtls (Eclipse JDT Language Server) is configured via =ftplugin/java.lua=, not through =vim.lsp.enable()=.
 This is the nvim-jdtls recommended approach because jdtls needs per-project workspace isolation and =start_or_attach()= semantics.
 
 | Mode | Key          | Action           |
@@ -270,7 +303,7 @@ with all submodule dependencies resolved.
 
 * References
 
-- [[https://github.com/LazyVim/LazyVim][LazyVim starter kit]]
+- [[https://github.com/folke/lazy.nvim][lazy.nvim]] — plugin manager
+- [[https://neovim.io/doc/user/lsp/][Neovim LSP docs]] — native LSP configuration
 - [[https://github.com/kayspark/nvim-nepes][Nepes colorscheme]]
 - Git signing runbook: =docs/ops/git-signing.md=
-- [[https://github.com/joshmedeski/dotfiles.git][Josh Medeski's dotfiles]]
