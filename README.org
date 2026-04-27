@@ -20,21 +20,22 @@ Part of the [[https://github.com/kayspark/.dotfiles][dotfiles]] repo as a git su
 | Completion | Native =vim.lsp.completion.enable= (no blink.cmp)      |
 | Theme      | [[https://github.com/kayspark/nvim-nepes][nepes]] (dark/light, transparent)                       |
 | Nav        | smart-splits.nvim (cross Ghostty/tmux panes)           |
-| Git        | Neogit + Diffview                                      |
+| Git        | Fugitive + Diffview + Gitsigns                         |
 | Picker     | snacks.nvim (picker, explorer, indent, notifier)       |
 
 ** Key Choices
 
-- *No framework* — previously used LazyVim; replaced with 30 hand-picked plugins + Neovim 0.12 built-ins.
+- *No framework* — previously used LazyVim; replaced with 28 hand-picked plugins + Neovim 0.12 built-ins.
 - *Native LSP* — =vim.lsp.config()= / =vim.lsp.enable()= with nvim-lspconfig providing server defaults. 19 servers configured.
 - *Native completion* — =vim.lsp.completion.enable()= with autotrigger. No blink.cmp/nvim-cmp.
-- *Neogit-first Git workflow* — stage/commit/push from Neogit, diff review via Diffview.
+- *Fugitive + Gitsigns Git workflow* — stage/commit from Fugitive (=:Git=), hunk ops via Gitsigns, diff review via Diffview.
 - *smart-splits.nvim* — seamless navigation across editor splits and Ghostty/tmux panes.
 - *Nepes corporate theme* — matching colorscheme across Emacs, tmux, Ghostty, starship.
+- *Zero plenary.nvim* — removed plenary dependency by replacing Neogit with Fugitive.
 
 ** Plugin Count
 
-30 plugins total (including dependencies). See =lua/plugins/= for all specs.
+28 plugins total (including dependencies). See =lua/plugins/= for all specs.
 
 * Installation
 
@@ -108,12 +109,14 @@ Uses [[https://github.com/mrjones2014/smart-splits.nvim][smart-splits.nvim]] —
 
 ** Git
 
-Neogit is the primary Git UI.
+Fugitive is the primary Git UI, with Gitsigns for hunk operations and Diffview for diff review.
 
 | Mode | Key          | Action            |
 |------+--------------+-------------------|
-| n    | =<leader>gg= | Neogit status     |
-| n    | =<leader>gc= | Neogit commit     |
+| n    | =<leader>gg= | Fugitive status   |
+| n    | =<leader>gc= | Fugitive commit   |
+| n    | =<leader>gb= | Fugitive blame    |
+| n    | =<leader>gl= | Fugitive log      |
 | n    | =<leader>gd= | Diffview open     |
 | n    | =<leader>gD= | Diffview close    |
 | n    | =]g=         | Next git hunk     |
@@ -125,54 +128,29 @@ Neogit is the primary Git UI.
 | n    | =gu=         | Undo stage hunk   |
 | n    | =gh=         | Preview hunk      |
 
-*** Git Workflow (Neogit + Diffview)
+*** Git Workflow (Fugitive + Gitsigns + Diffview)
 
-Recommended day-to-day flow:
-
-**** 1) Add / stage changes
-- Open Neogit status: =<leader>gg=
-- Stage from Neogit status buffer (Magit-style) for file/hunk selection.
-- Or stage directly from code with gitsigns:
-  - =gs= stage hunk
-  - =gS= stage buffer
-  - =gh= preview hunk before staging
+**** 1) Stage changes
+- Stage hunks from code: =gs= (hunk), =gS= (buffer), =gh= (preview first)
+- Or open Fugitive status: =<leader>gg= (=:Git=), press =s= to stage, =u= to unstage
 
 **** 2) Commit
-- Open commit flow: =<leader>gc=
-- Write commit message in the commit buffer.
-- Save and confirm commit from Neogit.
-- If commit signing is required, follow =docs/ops/git-signing.md=.
+- =<leader>gc= or =cc= from Fugitive status buffer
+- Write message, =:wq= to confirm
 
-**** 3) Fetch / pull / rebase
-- Open Neogit: =<leader>gg=
-- Use Neogit popups to run fetch/pull/rebase operations.
-- Tip: use =?= inside Neogit to see current buffer actions.
+**** 3) Diff review
+- =<leader>gd= opens Diffview for full repo diff
+- =:DiffviewFileHistory %= for current file history
+- =:Gvdiffsplit= for inline diff of current file
 
-**** 4) Review diff before merge
-- Open repository diff view: =<leader>gd= (DiffviewOpen)
-- Close diff view: =<leader>gD= (DiffviewClose)
-- Useful commands:
-  - =:DiffviewFileHistory= for file/repo history diff
-  - =:DiffviewToggleFiles= to show/hide file panel
-  - =:DiffviewRefresh= after branch updates
-
-**** 5) Merge with diff
-- Fetch and checkout target branch in Neogit.
-- Open =<leader>gd= and review changed files before merge.
-- Run merge from Neogit popup.
-- If conflicts occur:
-  - Use Diffview to inspect both sides and conflict locations.
-  - Resolve in buffers, stage resolved files, then complete merge commit.
-
-**** 6) Push
-- Open Neogit: =<leader>gg=
-- Use push popup/action to push current branch.
-- Prefer pushing only after diff review and clean status.
+**** 4) Push / Pull
+- =:Git push=, =:Git pull --rebase=, =:Git fetch= from command line
+- Or use =P= / =p= shortcuts from Fugitive status buffer
 
 **** Quick habits
-- Before commit: =gh= on important hunks + =<leader>gd= full diff pass.
-- Before push: confirm no unstaged/untracked surprises in Neogit status.
-- For history investigation: =:DiffviewFileHistory %= on current file.
+- Before commit: =gh= on important hunks + =<leader>gd= full diff pass
+- Before push: =<leader>gg= to confirm clean status
+- For blame: =<leader>gb= to see line-by-line history
 
 ** Bracket Navigation (~]~ / ~[~)
 
