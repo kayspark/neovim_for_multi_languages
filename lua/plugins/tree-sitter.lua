@@ -7,18 +7,9 @@ vim.filetype.add({
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        config = function()
-          require("nvim-treesitter-textobjects").setup({
-            select = { lookahead = true },
-          })
-        end,
-      },
-    },
     config = function()
       -- New nvim-treesitter (main branch) — highlight/indent are native Neovim 0.12
       require("nvim-treesitter").install({

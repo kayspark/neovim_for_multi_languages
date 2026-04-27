@@ -15,30 +15,17 @@ return {
     },
   },
   {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-    },
-    cmd = "Neogit",
-    opts = {
-      signs = {
-        hunk = { "", "" },
-        item = { "", "" },
-        section = { "", "" },
-      },
-      integrations = {
-        diffview = true,
-      },
-    },
+    "tpope/vim-fugitive",
+    cmd = { "Git", "G", "Gvdiffsplit", "Glog", "Gread", "Gwrite" },
     keys = {
-      { "<leader>gc", "<cmd>lua require('neogit').open({'commit'})<CR>", desc = "Neogit commit" },
-      { "<leader>gg", "<cmd>lua require('neogit').open()<CR>", desc = "Neogit status" },
+      { "<leader>gg", "<cmd>Git<cr>", desc = "Fugitive status" },
+      { "<leader>gc", "<cmd>Git commit<cr>", desc = "Fugitive commit" },
+      { "<leader>gb", "<cmd>Git blame<cr>", desc = "Fugitive blame" },
+      { "<leader>gl", "<cmd>Git log --oneline<cr>", desc = "Fugitive log" },
     },
   },
   {
     "sindrets/diffview.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
     cmd = {
       "DiffviewOpen",
       "DiffviewClose",

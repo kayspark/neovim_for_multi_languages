@@ -13,7 +13,7 @@ return {
   {
     "folke/todo-comments.nvim",
     event = "BufReadPre",
-    dependencies = "nvim-lua/plenary.nvim",
+    dependencies = {},
     opts = {},
     keys = {
       { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "TODOs (Trouble)" },
